@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public Transform hitWallTransform;
     public float hitWallDelay = 0.1f;
     public Vector2 hitWallSize;
+    public float wallJumpSpeed = 20;
     [Header("Gravity")]
     public float gravity = 8;
     public float jumpGravity = 3;
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour
     public float axisMargin; // marge de detection du controller
     #endregion
 
-    #region Movement vars
+    #region Private vars
     //collisions
     bool hitWall;
     bool grounded;
@@ -48,7 +49,9 @@ public class Player : MonoBehaviour
     //jump;
     bool jumpInput;
     float preJumpTimer;
+    //wall jump
     float hitWallTimer;
+    Vector3 wallPos;
 
     //life
     bool dead = false;
@@ -74,6 +77,7 @@ public class Player : MonoBehaviour
     {
         SetJumpInput();
         ResetVelocity();
+        CheckHitWall();
         CheckGrounded();
         Move();
         Jump();
@@ -85,18 +89,11 @@ public class Player : MonoBehaviour
         rb2d.velocity = velocity;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
-        {
-            hitWall = true;
-        }
-    }
-
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawCube(groundCheckTransform.position, new Vector3(checkGroundSize.x, checkGroundSize.y, 1));
+        Gizmos.DrawCube(hitWallTransform.position, new Vector3(hitWallSize.x, hitWallSize.y, 1));
     }
     #endregion
 
@@ -113,14 +110,8 @@ public class Player : MonoBehaviour
     {
         return dead;
     }
-    #endregion
-    
-    void ResetVelocity()
-    {
-        velocity.x = rb2d.velocity.x;
-        velocity.y = rb2d.velocity.y;
-    }
-   
+    #endregion   
+       
     #region Jump
     void SetJumpInput()
     {
@@ -137,13 +128,13 @@ public class Player : MonoBehaviour
     }
     void Jump()
     {
-        if (jumpInput && IsGrounded())
+        if (jumpInput && CanJump())
         {
             velocity.y = jumpSpeed;
             rb2d.gravityScale = jumpGravity;
-            if (true)
+            if (!IsGrounded() && IsHittingWall())
             {
-
+                velocity.x = wallJumpSpeed * -Mathf.Sign(wallPos.x);
             }
         }
 
@@ -160,6 +151,10 @@ public class Player : MonoBehaviour
         {
             velocity.y = velocity.y * cuttingJumpFactor;
         }
+    }
+    bool CanJump()
+    {
+        return IsGrounded() || IsHittingWall();
     }
     #endregion
 
@@ -216,39 +211,51 @@ public class Player : MonoBehaviour
 
 
     }
+    void ResetVelocity()
+    {
+        velocity.x = rb2d.velocity.x;
+        velocity.y = rb2d.velocity.y;
+    }
     #endregion
 
     #region HitWall
     void CheckHitWall()
     {
-        Collider2D c = Physics2D.OverlapBox(hitWallTransform.position, hitWallSize, 0, LayerMask.NameToLayer("Wall"));
+        Collider2D c = Physics2D.OverlapBox(hitWallTransform.position, hitWallSize, 0, LayerMask.GetMask("Wall"));
         if (c != null)
         {
-            OnHitWall();
+            OnHitWall(c);
         }
         else
         {
             OnNoHitWall();
         }
     }
-    void OnHitWall()
+    void OnHitWall(Collider2D c)
     {
         hitWall = true;
         hitWallTimer = 0;
+        wallPos = c.transform.position;
     }
     void OnNoHitWall()
     {
         hitWall = false;
         hitWallTimer += Time.deltaTime;
     }
+    bool IsHittingWall()
+    {
+        return hitWall || hitWallTimer<hitWallDelay;
+    }
     #endregion
 
     #region Grounded
     void CheckGrounded()
     {
-        Collider2D c = Physics2D.OverlapBox(groundCheckTransform.position, checkGroundSize, 0, LayerMask.NameToLayer("Wall"));
+        Collider2D c = Physics2D.OverlapBox(groundCheckTransform.position, checkGroundSize, 0, LayerMask.GetMask("Wall"));
+
         if (c != null)
         {
+            Debug.Log("grounded");
             OnGrounded();
         }
         else
@@ -286,7 +293,7 @@ public class Player : MonoBehaviour
         animator.SetFloat("VelocityX", Mathf.Abs(rb2d.velocity.x));
         animator.SetFloat("VelocityY", Mathf.Abs(rb2d.velocity.y));
         animator.SetBool("Run", run);
-        animator.SetBool("Grounded", grounded);
+        animator.SetBool("Grounded", IsGrounded());
     }
     #endregion
 }
