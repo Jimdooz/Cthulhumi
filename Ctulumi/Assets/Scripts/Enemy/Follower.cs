@@ -8,6 +8,9 @@ public class Follower : MonoBehaviour
 
     public Light2D observerLight;
     public FieldOfView field;
+    private Rigidbody2D followerPhysics;
+
+    public float speedFollower = 2;
 
     public float viewRadius = 8;
     public float viewAngle = 80;
@@ -20,6 +23,8 @@ public class Follower : MonoBehaviour
 
     private Transform target;
 
+    public bool dash = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +35,8 @@ public class Follower : MonoBehaviour
         observerLight.pointLightOuterRadius = viewRadius;
         field.viewRadius = viewRadius;
         field.viewAngle = viewAngle;
+
+        followerPhysics = GetComponent<Rigidbody2D>();
 
         changeStateToIdle();
     }
@@ -62,6 +69,17 @@ public class Follower : MonoBehaviour
         Vector3 upTarget = target.position - observerLight.gameObject.transform.position;
         Vector3 yVelocity = new Vector3();
         observerLight.gameObject.transform.up = Vector3.SmoothDamp(upTransform, upTarget, ref yVelocity, 0.1f);
+
+        //Go to the target
+        if (dash)
+        {
+            followerPhysics.AddForce((target.position - transform.position).normalized * Time.deltaTime * 100, ForceMode2D.Impulse);
+            dash = false;
+        }
+        else
+        {
+            followerPhysics.MovePosition(Vector2.Lerp(transform.position, target.position, Time.deltaTime * speedFollower));
+        }
     }
 
     void alertFunction() {
