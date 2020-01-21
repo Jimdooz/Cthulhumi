@@ -9,11 +9,11 @@ public class Sentry : MonoBehaviour
     public Light2D observerLight;
     public FieldOfView field;
 
-    public float viewRadius;
-    public float viewAngle;
+    public float viewRadius = 8;
+    public float viewAngle = 80;
+    public List<float> positions; //Différentes positions
 
     public bool blinking;//si la sentinelle cligne ou non (incompatible avec les sentinelles mobiles)
-    public bool[] orientations; //liste des différentes orientations de la sentinelle
     public int currentPosition;//position actuelle
     public int watchtime;//temps avant que la sentinelle change d'orientation
     public int blinktime;//temps avant clignage
@@ -21,51 +21,54 @@ public class Sentry : MonoBehaviour
     private bool blinked;
     private float chronometer;
 
+    void setObserver(Vector3 targetPosition)
+    {
+        Vector3 upTransform = observerLight.gameObject.transform.up;
+        Vector3 upTarget = targetPosition - observerLight.gameObject.transform.position;
+        Vector3 yVelocity = new Vector3();
+        observerLight.gameObject.transform.up = Vector3.SmoothDamp(upTransform, upTarget, ref yVelocity, 0.1f);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         chronometer = 0;
         currentPosition = 0;
-        viewRadius = 8;
-        viewAngle = 80;
-        blinking = false;
         observerLight.pointLightInnerAngle = viewAngle;
         observerLight.pointLightOuterAngle = viewAngle;
         observerLight.pointLightInnerRadius = viewRadius;
         observerLight.pointLightOuterRadius = viewRadius;
         field.viewRadius = viewRadius;
         field.viewAngle = viewAngle;
-        field.gameObject.transform.eulerAngles = new Vector3(0,0,((currentPosition - 1) * 45));//hacky math
+        if(blinking) field.gameObject.transform.eulerAngles = new Vector3(0,0,0);//hacky math
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (watchtime > 0)//si on a un watchtime (0 permet de garder la sentinelle fixe)
+        if (!blinking)//si on a un watchtime (0 permet de garder la sentinelle fixe)
         {
             chronometer += Time.deltaTime;//update chrono
+            setObserver(new Vector3(transform.position.x + Mathf.Sin(positions[currentPosition]), transform.position.y + Mathf.Cos(positions[currentPosition]), 0));
             if (chronometer > watchtime)//à la fin du chrono
             {
-                if (currentPosition == 2)//si on dépasse la liste orientations
+                if (currentPosition == positions.Count - 1)//si on dépasse la liste orientations
                     currentPosition = 0;//on revient au début
                 else
                     currentPosition++;//sinon on passe à la valeur suivante
-                if (orientations[currentPosition])
-                {
-                    field.gameObject.transform.eulerAngles = new Vector3(0, 0, ((currentPosition - 1) * 45));
-                    chronometer = 0;//reset chrono
-                }
+                chronometer = 0;//reset chrono
             }
         }
-        else if(blinking)
+        else
         {
             chronometer += Time.deltaTime;
             if (chronometer > blinktime)
             {
                 blinked = !blinked;
+                observerLight.intensity = blinked ? 1 : 0;
                 chronometer = 0;
             }
         }
-        //si le joueur est en vue, le tuer
+            //si le joueur est en vue, le tuer
     }
 }

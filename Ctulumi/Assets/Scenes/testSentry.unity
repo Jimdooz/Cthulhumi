@@ -145,7 +145,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916892308}
-  m_LocalRotation: {x: -0, y: -0, z: 0.9725082, w: -0.2328688}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -196,8 +196,8 @@ MonoBehaviour:
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_PointLightInnerAngle: 45
-  m_PointLightOuterAngle: 45
+  m_PointLightInnerAngle: 55
+  m_PointLightOuterAngle: 55
   m_PointLightInnerRadius: 1
   m_PointLightOuterRadius: 10
   m_PointLightDistance: 3
@@ -329,11 +329,13 @@ MonoBehaviour:
   observerLight: {fileID: 916892311}
   field: {fileID: 916892310}
   viewRadius: 8
-  viewAngle: 30
+  viewAngle: 80
+  positions:
+  - -45
+  - 45
   blinking: 1
-  orientations: 010000
   currentPosition: 0
-  watchtime: 0
+  watchtime: 2
   blinktime: 2
 --- !u!95 &1530107608
 Animator:
