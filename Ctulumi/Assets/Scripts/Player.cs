@@ -10,16 +10,19 @@ public class Player : MonoBehaviour
     public float runSpeed;
     public bool instantStop = true;
     public bool airControl;
-    public float airControlSpeed;
+    //public float airControlSpeed;
     [Header("Jump")]
-    public float multiplyVelocityX;
     public float jumpSpeed;
-    public float jumpTimerMax=0.5f;
+    public float jumpTimerMax = 0.5f;
     public bool cuttingJumpOnKeyUp;
     public float cuttingJumpFactor = 0.5f;
+    public float preJumpDelay = 0.1f;
     public Vector2 checkGroundSize;
     public float groundedDelay = 0.1f;
     public Transform groundCheck;
+    [Header("Gravity")]
+    public float gravity = 8;
+    public float jumpGravity = 3;
     [Header("Controller settings")]
     public float axisMargin; // marge de detection du controller
     #endregion
@@ -28,9 +31,7 @@ public class Player : MonoBehaviour
     //collisions
     bool hitWall;
     bool grounded;
-    float groundedTimer;
-    //jump
-    bool jumping;
+    float inAirTimer;
 
     //flip
     bool right = true;
@@ -38,6 +39,10 @@ public class Player : MonoBehaviour
     bool run;
     float speed;
     Vector2 velocity;
+
+    //jump;
+    bool jumpInput;
+    float preJumpTimer;
     #endregion
 
     #region Components
@@ -51,8 +56,14 @@ public class Player : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
+    private void Start()
+    {
+        rb2d.gravityScale = gravity;
+    }
     void Update()
     {
+        SetJumpInput();
+        ResetVelocity();
         CheckGrounded();
         Move();
         Jump();
@@ -61,10 +72,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (jumping)
-            rb2d.velocity = velocity;
-        else
-            rb2d.velocity = new Vector2(velocity.x, rb2d.velocity.y);
+        rb2d.velocity = velocity;
     }
     private void OnDrawGizmosSelected()
     {
@@ -72,23 +80,37 @@ public class Player : MonoBehaviour
         Gizmos.DrawCube(groundCheck.position, new Vector3(checkGroundSize.x, checkGroundSize.y, 1));
     }
     #endregion
-
+    void ResetVelocity()
+    {
+        velocity.x = rb2d.velocity.x;
+        velocity.y = rb2d.velocity.y;
+    }
+    void SetJumpInput()
+    {
+        preJumpTimer += Time.deltaTime;
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpInput = true;
+            preJumpTimer = 0;
+        }
+        if (preJumpTimer >preJumpDelay)
+        {
+            jumpInput = false;
+        }
+    }
     void Jump()
     {
-        if (Input.GetButton("Jump") && CanJump())
+        if (jumpInput && IsGrounded())
         {
             velocity.y = jumpSpeed;
-            jumping = true;
-        }
-        else
-        {
-            velocity.y = rb2d.velocity.y;
+            rb2d.gravityScale = jumpGravity;
         }
 
-        if (Input.GetButtonUp("Jump") && !IsGrounded())
+        if (Input.GetButtonUp("Jump") || (inAirTimer > jumpTimerMax))
         {
-            CutJump();
-            jumping = false;
+            if (Input.GetButtonUp("Jump") && cuttingJumpOnKeyUp)
+                CutJump();
+            rb2d.gravityScale = gravity;
         }
     }
     void CutJump()
@@ -102,12 +124,12 @@ public class Player : MonoBehaviour
     void Move()
     {
         float vx = Input.GetAxisRaw("Horizontal");
-        if (IsGrounded())
+        if (IsGrounded() || airControl)
         {
-            if (Input.GetButton("Run"))
+            if (Mathf.Abs(Input.GetAxisRaw("Run")) > axisMargin)
             {
                 speed = runSpeed;
-                run = true;
+                run = IsGrounded();
             }
             else
             {
@@ -115,12 +137,9 @@ public class Player : MonoBehaviour
                 run = false;
             }
         }
-        else
+        else 
         {
-            if (airControl)
-                speed = airControlSpeed;
-            else
-                speed = 0;
+            speed = 0;
         }
 
         if (Mathf.Abs(vx) > axisMargin && CanMove()) //permet de ne pas se déplacer si le joystick est à l'arrêt
@@ -131,7 +150,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (instantStop && IsGrounded())
+            if (instantStop)
                 velocity.x = 0;
             else
                 velocity.x = rb2d.velocity.x;
@@ -155,20 +174,16 @@ public class Player : MonoBehaviour
     void OnNotGrounded()
     {
         grounded = false;
-        groundedTimer += Time.deltaTime;
+        inAirTimer += Time.deltaTime;
     }
     void OnGrounded()
     {
         grounded = true;
-        groundedTimer = 0;
+        inAirTimer = 0;
     }
     bool IsGrounded()
     {
-        return grounded || groundedTimer < groundedDelay;
-    }
-    bool CanJump()
-    {
-        return IsGrounded() || (cuttingJumpOnKeyUp && groundedTimer < jumpTimerMax);
+        return grounded || inAirTimer < groundedDelay;
     }
     bool CanMove()
     {
@@ -187,7 +202,6 @@ public class Player : MonoBehaviour
         animator.SetFloat("VelocityX", Mathf.Abs(rb2d.velocity.x));
         animator.SetFloat("VelocityY", Mathf.Abs(rb2d.velocity.y));
         animator.SetBool("Run", run);
-        animator.SetBool("Jumping", jumping);
         animator.SetBool("Grounded", grounded);
     }
 }
