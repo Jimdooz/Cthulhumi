@@ -158,6 +158,13 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    #region Climb
+    void Climb()
+    {
+        //if(IsHittingWall)
+    }
+    #endregion
+
     #region Move
     bool CanMove()
     {
