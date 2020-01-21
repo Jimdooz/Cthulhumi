@@ -109,7 +109,7 @@ public class Sentry : MonoBehaviour
         {
             Vector3 yVelocity = new Vector3();
             Vector3 newPosition = new Vector3(tongue.GetPosition(1).x + (transform.up.x), tongue.GetPosition(1).y + (transform.up.y), 0);
-            tongue.SetPosition(1, Vector3.SmoothDamp(tongue.GetPosition(1), newPosition, ref yVelocity, 0.2f));
+            tongue.SetPosition(1, Vector3.SmoothDamp(tongue.GetPosition(1), newPosition, ref yVelocity, 0.1f));
             if(target) setObserver(target.position);
             else
             {
