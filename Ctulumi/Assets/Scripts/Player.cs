@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [Header("Move")]
     public float walkSpeed;
     public float runSpeed;
+    public float airControlSpeed;
     public bool instantStop = true;
     public bool airControl;
     //public float airControlSpeed;
@@ -124,7 +125,7 @@ public class Player : MonoBehaviour
     void Move()
     {
         float vx = Input.GetAxisRaw("Horizontal");
-        if (IsGrounded() || airControl)
+        if (IsGrounded())
         {
             if (Mathf.Abs(Input.GetAxisRaw("Run")) > axisMargin)
             {
@@ -137,16 +138,27 @@ public class Player : MonoBehaviour
                 run = false;
             }
         }
-        else 
+        else if(airControl)
         {
-            speed = 0;
+            speed = airControlSpeed;
         }
 
         if (Mathf.Abs(vx) > axisMargin && CanMove()) //permet de ne pas se déplacer si le joystick est à l'arrêt
         {
             if ((right && vx < 0) || (!right && vx > 0))
                 Flip();
-            velocity.x = vx * speed;
+            if (IsGrounded()) 
+                velocity.x = vx * speed;
+            else if (airControl)
+            {
+                float x = vx * speed;
+                float rx = rb2d.velocity.x;
+                if (x > 0 && rx > 0)
+                    x = Mathf.Max(x, rx);
+                else if (x < 0 && rx < 0)
+                    x = Mathf.Min(x, rx);
+                velocity.x = x;
+            }
         }
         else
         {
@@ -187,7 +199,7 @@ public class Player : MonoBehaviour
     }
     bool CanMove()
     {
-        return IsGrounded() || airControl;
+        return airControl || IsGrounded();
     }
     void Flip()
     {
@@ -204,4 +216,14 @@ public class Player : MonoBehaviour
         animator.SetBool("Run", run);
         animator.SetBool("Grounded", grounded);
     }
+    #region Player API 
+    public void Die()
+    {
+
+    }
+    public void Stun()
+    {
+
+    }
+    #endregion
 }
