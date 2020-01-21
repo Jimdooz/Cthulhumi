@@ -184,11 +184,7 @@ public class Player : MonoBehaviour
                 run = false;
             }
         }
-<<<<<<< HEAD
         else
-=======
-        else if(airControl)
->>>>>>> 1c82e8eb78e4037d5647add858c3a38096c9cf47
         {
             speed = airControlSpeed;
         }
@@ -274,16 +270,9 @@ public class Player : MonoBehaviour
     {
         return grounded || inAirTimer < groundedDelay;
     }
-<<<<<<< HEAD
     #endregion
 
     #region Graphics
-=======
-    bool CanMove()
-    {
-        return airControl || IsGrounded();
-    }
->>>>>>> 1c82e8eb78e4037d5647add858c3a38096c9cf47
     void Flip()
     {
         Vector3 v = transform.localScale;
@@ -299,17 +288,5 @@ public class Player : MonoBehaviour
         animator.SetBool("Run", run);
         animator.SetBool("Grounded", grounded);
     }
-<<<<<<< HEAD
-=======
-    #region Player API 
-    public void Die()
-    {
-
-    }
-    public void Stun()
-    {
-
-    }
->>>>>>> 1c82e8eb78e4037d5647add858c3a38096c9cf47
     #endregion
 }
