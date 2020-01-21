@@ -20,6 +20,8 @@ public class Human : MonoBehaviour
     public float viewRadius = 8;
     public float viewAngle = 80;
 
+    public GameObject bloodEffect;
+
     private Transform target;
     // Start is called before the first frame update
     void Start() {
@@ -81,6 +83,15 @@ public class Human : MonoBehaviour
     }
 
     public void Die() {
+        if (!dead)
+        {
+            GameObject smokePuff = Instantiate(bloodEffect, transform.position, transform.rotation) as GameObject;
+            ParticleSystem parts = smokePuff.GetComponent<ParticleSystem>();
+            float totalDuration = parts.main.duration + parts.main.startLifetime.constantMax;
+            Destroy(smokePuff, totalDuration);
+            Destroy(this.gameObject);
+        }
+
         dead = true;
         humanPhysics.freezeRotation = true;
         currentState = STATE.pls;

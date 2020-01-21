@@ -142,9 +142,12 @@ public class Follower : MonoBehaviour
         allTargets.AddRange(field.visibleTargets);
         for (int i = 0; i < allTargets.Count; i++)
         {
-            Player player = allTargets[i].gameObject.GetComponent<Player>();
-            Human human = allTargets[i].gameObject.GetComponent<Human>();
-            if ((player && !player.IsDead()) || (human && !human.IsDead())) { target = allTargets[i]; break; }
+            if (allTargets[i])
+            {
+                Player player = allTargets[i].gameObject.GetComponent<Player>();
+                Human human = allTargets[i].gameObject.GetComponent<Human>();
+                if ((player && !player.IsDead()) || (human && !human.IsDead())) { target = allTargets[i]; break; }
+            }
         }
         if (target)
         {

@@ -27,8 +27,9 @@ public class Sentry : MonoBehaviour
     private Animator animator;
 
     private bool initTongue = true;
-    private float animationTongueMax = 1f;
+    public float animationTongueMax = 1f;
     private float animationTongue = 0;
+    private bool beat = false;
 
     void setObserver(Vector3 targetPosition)
     {
@@ -58,6 +59,7 @@ public class Sentry : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        tongue.SetPosition(0, transform.position);
         if (!blinking)//si on a un watchtime (0 permet de garder la sentinelle fixe)
         {
             chronometer += Time.deltaTime;//update chrono
@@ -86,6 +88,7 @@ public class Sentry : MonoBehaviour
         if (!target) {
             initTongue = true;
             CheckTargets();
+            GoBackTongue();
         }
         if (target)
         {
@@ -96,28 +99,46 @@ public class Sentry : MonoBehaviour
 
     void TongueEat()
     {
-        animationTongue += Time.deltaTime;
         if (initTongue) {
             animationTongue = 0;
+            beat = false;
             initTongue = false;
         }
-        if(animationTongue < animationTongueMax)
+        animationTongue += Time.deltaTime;
+        if(!beat && animationTongue < animationTongueMax)
         {
-            Vector3 oldPos = tongue.GetPosition(1);
-            Vector3 posTarget = target.position - transform.position;
             Vector3 yVelocity = new Vector3();
-            tongue.SetPosition(1, Vector3.SmoothDamp(oldPos, posTarget, ref yVelocity, 0.02f));
-            if (Vector3.Distance(tongue.GetPosition(1), target.position - transform.position) < 0.1f) {
-                animationTongue = animationTongueMax;
+            Vector3 newPosition = new Vector3(tongue.GetPosition(1).x + (transform.up.x), tongue.GetPosition(1).y + (transform.up.y), 0);
+            tongue.SetPosition(1, Vector3.SmoothDamp(tongue.GetPosition(1), newPosition, ref yVelocity, 0.1f));
+            if(target) setObserver(target.position);
+            else
+            {
+                target = null;
             }
         }
-        else
+        else if (!beat && animationTongue >= animationTongueMax)
         {
-            Vector3 oldPos = tongue.GetPosition(1);
-            Vector3 posTarget = tongue.GetPosition(0);
-            Vector3 yVelocity = new Vector3();
-            tongue.SetPosition(1, Vector3.SmoothDamp(oldPos, posTarget, ref yVelocity, 0.08f));
-            target.position = tongue.GetPosition(1) + transform.position;
+            if (!field.visibleTargets.Contains(target))
+            {
+                target = null;
+            }
+            else
+            {
+                setObserver(target.position);
+                Vector3 oldPos = tongue.GetPosition(1);
+                Vector3 posTarget = target.position;
+                Vector3 yVelocity = new Vector3();
+                tongue.SetPosition(1, Vector3.SmoothDamp(oldPos, posTarget, ref yVelocity, 0.01f));
+                if (Vector3.Distance(tongue.GetPosition(1), target.position) < 0.1f)
+                {
+                    beat = true;
+                    animationTongue = animationTongueMax;
+                }
+            }
+        }
+        else if(beat){
+            GoBackTongue();
+            target.position = tongue.GetPosition(1);
 
             if(Vector3.Distance(tongue.GetPosition(1), tongue.GetPosition(0)) < 0.1f)
             {
@@ -125,7 +146,7 @@ public class Sentry : MonoBehaviour
                 Player player = target.gameObject.GetComponent<Player>();
                 Human human = target.gameObject.GetComponent<Human>();
                 if (player) player.Die();
-                else if (human) Destroy(human.gameObject);
+                else if (human) human.Die();
                 target = null;
             }
         }
@@ -137,10 +158,22 @@ public class Sentry : MonoBehaviour
         {
             for (int i = 0; i < field.visibleTargets.Count; i++)
             {
-                Player player = field.visibleTargets[i].gameObject.GetComponent<Player>();
-                Human human = field.visibleTargets[i].gameObject.GetComponent<Human>();
-                if ((player && !player.IsDead()) || (human && !human.IsDead())) { target = field.visibleTargets[i]; break; }
+                if (field.visibleTargets[i])
+                {
+                    Player player = field.visibleTargets[i].gameObject.GetComponent<Player>();
+                    Human human = field.visibleTargets[i].gameObject.GetComponent<Human>();
+                    if ((player && !player.IsDead()) || (human && !human.IsDead())) { target = field.visibleTargets[i]; break; }
+                }
             }
         }
+    }
+
+    void GoBackTongue()
+    {
+        Vector3 oldPos = tongue.GetPosition(1);
+        Vector3 posTarget = tongue.GetPosition(0);
+        Vector3 yVelocity = new Vector3();
+        tongue.SetPosition(1, Vector3.SmoothDamp(oldPos, posTarget, ref yVelocity, 0.08f));
+        if(Vector3.Distance(tongue.GetPosition(1), tongue.GetPosition(0)) < 0.1f) animator.SetBool("eat", false);
     }
 }

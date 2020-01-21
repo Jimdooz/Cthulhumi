@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2224863606573010964}
   - component: {fileID: 2224863606573010967}
   m_Layer: 0
-  m_Name: HeadTatacle
+  m_Name: HeadTentacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &2224863606963112725
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 2224863606963112723}
   - component: {fileID: 2224863606963112722}
   m_Layer: 0
-  m_Name: TantacleLine
+  m_Name: TentacleLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -306,9 +306,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2224863608363430256}
-  - component: {fileID: 2224863608363430257}
+  - component: {fileID: 543195326}
   m_Layer: 0
-  m_Name: Tantacle
+  m_Name: Tentacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -330,7 +330,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2224863608363430257
+--- !u!114 &543195326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1018afc60cbee458f98375a969768d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedTantacle: 2
-  speedRewind: 35
-  HeadTantacle: {fileID: 2224863606573010969}
-  Tantacle: {fileID: 2224863606963112722}
+  speedTentacle: 2
+  speedRewind: 30
+  HeadTentacle: {fileID: 2224863606573010969}
+  Tentacle: {fileID: 2224863606963112722}
