@@ -123,12 +123,13 @@ MonoBehaviour:
   viewRadius: 8
   viewAngle: 45
   positions:
-  - 180
-  - 1
+  - 181
+  - 360
   blinking: 0
   currentPosition: 0
   watchtime: 5
   blinktime: 2
+  animationTongueMax: 0.8
 --- !u!70 &3904938037558666176
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -171,7 +172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3904938037626941631}
   m_LocalRotation: {x: -0, y: -0, z: -0.0012451888, w: 0.9999992}
-  m_LocalPosition: {x: 0.046, y: 0, z: 0}
+  m_LocalPosition: {x: 0.037, y: -0.215, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3904938037558666183}
@@ -307,8 +308,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0.07782745, y: -0.033039093, z: 0}
-  - {x: 0.079885006, y: -0.037748337, z: 1}
+  - {x: 0.039157867, y: -0.037335873, z: 0}
+  - {x: 0.13041353, y: 0.916687, z: 1}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -362,5 +363,5 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
