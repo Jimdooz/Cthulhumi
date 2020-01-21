@@ -100,6 +100,7 @@ public class Follower : MonoBehaviour
         }
         else
         {
+            GetComponent<SpriteRenderer>().flipX = target.position.x < transform.position.x;
             //followerPhysics.MovePosition(Vector2.Lerp(transform.position, target.position, Time.deltaTime * speedFollower));
         }
     }
