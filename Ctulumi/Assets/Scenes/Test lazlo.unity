@@ -411,7 +411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770866164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8649998, y: -2.8199997, z: -0.77580345}
+  m_LocalPosition: {x: 4.86, y: -3.15, z: -0.77580345}
   m_LocalScale: {x: 5.5503144, y: 0.80550337, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -745,6 +745,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 502582957088118383, guid: 050f6029b56d29645aa7ac8cb295b759,
+        type: 3}
+      propertyPath: jumpTimerMax
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 502582957088118383, guid: 050f6029b56d29645aa7ac8cb295b759,
+        type: 3}
+      propertyPath: jumpSpeed
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 502582957088118383, guid: 050f6029b56d29645aa7ac8cb295b759,
+        type: 3}
+      propertyPath: jumpGravity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 502582957088118383, guid: 050f6029b56d29645aa7ac8cb295b759,
+        type: 3}
+      propertyPath: cuttingJumpOnKeyUp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3867765539788212775, guid: 050f6029b56d29645aa7ac8cb295b759,
         type: 3}
       propertyPath: m_LocalPosition.y
