@@ -745,26 +745,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 502582957088118383, guid: 050f6029b56d29645aa7ac8cb295b759,
-        type: 3}
-      propertyPath: jumpTimerMax
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 502582957088118383, guid: 050f6029b56d29645aa7ac8cb295b759,
-        type: 3}
-      propertyPath: jumpSpeed
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 502582957088118383, guid: 050f6029b56d29645aa7ac8cb295b759,
-        type: 3}
-      propertyPath: jumpGravity
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 502582957088118383, guid: 050f6029b56d29645aa7ac8cb295b759,
-        type: 3}
-      propertyPath: cuttingJumpOnKeyUp
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3867765539788212775, guid: 050f6029b56d29645aa7ac8cb295b759,
         type: 3}
       propertyPath: m_LocalPosition.y
