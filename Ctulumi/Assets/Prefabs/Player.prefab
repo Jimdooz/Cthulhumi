@@ -151,11 +151,11 @@ MonoBehaviour:
   runSpeed: 10
   instantStop: 1
   airControl: 1
-  airControlSpeed: 5
-  jumpSpeed: 12
-  jumpTimerMax: 0.25
+  jumpSpeed: 16
+  jumpTimerMax: 0.2
   cuttingJumpOnKeyUp: 1
   cuttingJumpFactor: 0.5
+  preJumpDelay: 0.1
   checkGroundSize: {x: 0.6, y: 0.2}
   groundedDelay: 0.1
   groundCheck: {fileID: 3867765539788212775}

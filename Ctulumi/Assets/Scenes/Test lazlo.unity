@@ -763,7 +763,7 @@ PrefabInstance:
     - target: {fileID: 502582957088118383, guid: 050f6029b56d29645aa7ac8cb295b759,
         type: 3}
       propertyPath: cuttingJumpOnKeyUp
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3867765539788212775, guid: 050f6029b56d29645aa7ac8cb295b759,
         type: 3}
