@@ -159,9 +159,13 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Climb
+    void SetClimbInput()
+    {
+
+    }
     void Climb()
     {
-        //if(IsHittingWall)
+        //if(IsHittingWall())
     }
     #endregion
 

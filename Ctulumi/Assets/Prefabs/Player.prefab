@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3790001914129034639}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.835, z: 0}
+  m_LocalPosition: {x: 0, y: -1.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5622371710459515282}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4208299069277236905}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.357, y: -0.2, z: 0}
+  m_LocalPosition: {x: 0.75, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5622371710459515282}
@@ -188,12 +188,12 @@ MonoBehaviour:
   cuttingJumpOnKeyUp: 1
   cuttingJumpFactor: 0.2
   preJumpDelay: 0.1
-  checkGroundSize: {x: 0.6, y: 0.2}
+  checkGroundSize: {x: 1.2, y: 0.4}
   groundedDelay: 0.1
   groundCheckTransform: {fileID: 3867765539788212775}
   hitWallTransform: {fileID: 1817804459945529834}
   hitWallDelay: 0.1
-  hitWallSize: {x: 0.2, y: 1.2}
+  hitWallSize: {x: 0.4, y: 2.4}
   wallJumpSpeed: 15
   gravity: 9
   jumpGravity: 5
@@ -232,16 +232,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.013025939, y: -0.0058540106}
+  m_Offset: {x: 0.02605188, y: -0.011708022}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 4, y: 4}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7582215, y: 1.5980332}
+  m_Size: {x: 1.516443, y: 3.196066}
   m_EdgeRadius: 0
