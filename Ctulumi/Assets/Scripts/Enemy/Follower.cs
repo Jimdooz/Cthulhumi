@@ -72,7 +72,11 @@ public class Follower : MonoBehaviour
         if(field.visibleTargets.Count > 0 || fieldMin.visibleTargets.Count > 0) {
             changeStateToFound();
         }
-        if(basePoint) followerPhysics.MovePosition(Vector2.Lerp(transform.position, basePoint.position, Time.deltaTime * speedFollower));
+        if (basePoint)
+        {
+            transform.eulerAngles = new Vector3(0, basePoint.position.x > transform.position.x ? 0 : 180, 0);
+            followerPhysics.MovePosition(Vector2.Lerp(transform.position, basePoint.position, Time.deltaTime * speedFollower));
+        }
 
 
         timerChangeObserve += Time.deltaTime;
@@ -100,7 +104,7 @@ public class Follower : MonoBehaviour
         }
         else
         {
-            transform.eulerAngles = new Vector3(0, target.position.x < transform.position.x ? 0 : 180, 0);
+            transform.eulerAngles = new Vector3(0, target.position.x > transform.position.x ? 0 : 180, 0);
             //followerPhysics.MovePosition(Vector2.Lerp(transform.position, target.position, Time.deltaTime * speedFollower));
         }
     }

@@ -90,4 +90,9 @@ public class Human : MonoBehaviour
     public bool IsDead() {
         return dead;
     }
+
+    public bool isEnPls()
+    {
+        return currentState == STATE.pls;
+    }
 }

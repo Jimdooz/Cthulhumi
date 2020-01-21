@@ -13,5 +13,13 @@ public class PlsCheck : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.layer == LayerMask.NameToLayer("Wall")) isTrigger = true;
+        else if (col.gameObject.layer == LayerMask.NameToLayer("Humans"))
+        {
+            Human human = col.gameObject.GetComponent<Human>();
+            if (human && human.isEnPls())
+            {
+                isTrigger = true;
+            }
+        }
     }
 }
