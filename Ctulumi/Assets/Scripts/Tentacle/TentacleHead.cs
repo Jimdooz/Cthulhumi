@@ -18,8 +18,8 @@ public class TentacleHead : MonoBehaviour
     void Start() {
         HeadPhysics = HeadTentacle.GetComponent<Rigidbody2D>();
         Tentacle.positionCount = 2;
-        Tentacle.SetPosition(0, new Vector3(0, 0, 0));
-        allPoints.Add(new Vector2(0, 0));
+        Tentacle.SetPosition(0, new Vector2(0,0));
+        allPoints.Add(new Vector2(HeadTentacle.transform.localPosition.x, HeadTentacle.transform.localPosition.y));
     }
 
     // Update is called once per frame
@@ -36,14 +36,14 @@ public class TentacleHead : MonoBehaviour
 
         //Calcul distance dernier point
         Vector2 lastPoint = allPoints[allPoints.Count - 1];
-        Vector2 headPosition = new Vector2(HeadTentacle.transform.position.x, HeadTentacle.transform.position.y);
+        Vector2 headPosition = new Vector2(HeadTentacle.transform.localPosition.x, HeadTentacle.transform.localPosition.y);
         float distanceLastPoint = Vector2.Distance(lastPoint, headPosition);
 
         float isRetracting = Input.GetAxisRaw("Rewind");
 
 
         if (allPoints.Count > 100 || isRetracting > 0) {
-            HeadPhysics.MovePosition(Vector2.Lerp(headPosition, lastPoint, Time.deltaTime * (isRetracting > 0 ? isRetracting * speedRewind : 1f)));
+            HeadPhysics.MovePosition(Vector2.Lerp(headPosition + getPosition2D(), lastPoint + getPosition2D(), Time.deltaTime * (isRetracting > 0 ? isRetracting * speedRewind : 1f)));
         }
         if (distanceLastPoint > 0.15) {
             allPoints.Add((lastPoint + headPosition) /2);
@@ -55,8 +55,13 @@ public class TentacleHead : MonoBehaviour
             allPoints.RemoveAt(allPoints.Count - 1);
             Tentacle.positionCount = allPoints.Count + 1;
         }
-        Vector3 headPosition3D = new Vector3(HeadTentacle.transform.position.x, HeadTentacle.transform.position.y, 0f);
+        Vector3 headPosition3D = new Vector3(HeadTentacle.transform.localPosition.x, HeadTentacle.transform.localPosition.y, 0f);
         Tentacle.SetPosition(allPoints.Count, headPosition3D);
+    }
+
+    Vector2 getPosition2D()
+    {
+        return new Vector2(transform.position.x, transform.position.y);
     }
 
 

@@ -331,28 +331,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &543195325 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2224863608363430259, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
-    type: 3}
-  m_PrefabInstance: {fileID: 2224863607828689358}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &543195326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 543195325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b1018afc60cbee458f98375a969768d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedTentacle: 2
-  speedRewind: 30
-  HeadTentacle: {fileID: 1428693463}
-  Tentacle: {fileID: 2095692508}
 --- !u!1 &620535159
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +602,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 761820307}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.17, y: 0.7, z: 0}
+  m_LocalPosition: {x: -7.34, y: 8.63, z: 0}
   m_LocalScale: {x: 2.6658745, y: 5.3473496, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -875,12 +853,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1428693463 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2224863606573010969, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
-    type: 3}
-  m_PrefabInstance: {fileID: 2224863607828689358}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1737094358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,12 +1067,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!120 &2095692508 stripped
-LineRenderer:
-  m_CorrespondingSourceObject: {fileID: 2224863606963112722, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
-    type: 3}
-  m_PrefabInstance: {fileID: 2224863607828689358}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &312360123595869294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1176,7 +1142,7 @@ PrefabInstance:
     - target: {fileID: 312360124391722087, guid: 3ffef94869316814a9e29e8389865e2e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ffef94869316814a9e29e8389865e2e, type: 3}
@@ -1187,21 +1153,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2224863606573010967, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2224863606573010969, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
-        type: 3}
-      propertyPath: m_Name
-      value: HeadTentacle
-      objectReference: {fileID: 0}
-    - target: {fileID: 2224863606963112725, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
-        type: 3}
-      propertyPath: m_Name
-      value: TentacleLine
-      objectReference: {fileID: 0}
     - target: {fileID: 2224863608363430256, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1262,8 +1213,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tentacle
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2224863608363430257, guid: 5e195ae78d986b540bf1fb33ea0f0ff4, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e195ae78d986b540bf1fb33ea0f0ff4, type: 3}
 --- !u!1001 &3904938037210756156
 PrefabInstance:
@@ -1277,15 +1227,25 @@ PrefabInstance:
       propertyPath: animationTongueMax
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 3904938037558666180, guid: 58651d64e629e944b950574d83f99f1d,
+        type: 3}
+      propertyPath: positions.Array.data[0]
+      value: 181
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904938037558666180, guid: 58651d64e629e944b950574d83f99f1d,
+        type: 3}
+      propertyPath: positions.Array.data[1]
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 3904938037558666183, guid: 58651d64e629e944b950574d83f99f1d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.13
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 3904938037558666183, guid: 58651d64e629e944b950574d83f99f1d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.749
+      value: 5.68
       objectReference: {fileID: 0}
     - target: {fileID: 3904938037558666183, guid: 58651d64e629e944b950574d83f99f1d,
         type: 3}
@@ -1305,12 +1265,12 @@ PrefabInstance:
     - target: {fileID: 3904938037558666183, guid: 58651d64e629e944b950574d83f99f1d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3904938037558666183, guid: 58651d64e629e944b950574d83f99f1d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3904938037558666183, guid: 58651d64e629e944b950574d83f99f1d,
         type: 3}
@@ -1330,7 +1290,7 @@ PrefabInstance:
     - target: {fileID: 3904938037558666183, guid: 58651d64e629e944b950574d83f99f1d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 3904938037558666187, guid: 58651d64e629e944b950574d83f99f1d,
         type: 3}
@@ -1366,6 +1326,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Positions.Array.data[0].y
       value: -0.037335873
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904938038260750653, guid: 58651d64e629e944b950574d83f99f1d,
+        type: 3}
+      propertyPath: m_UseWorldSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58651d64e629e944b950574d83f99f1d, type: 3}

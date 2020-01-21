@@ -59,6 +59,7 @@ public class Sentry : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        tongue.SetPosition(0, transform.position);
         if (!blinking)//si on a un watchtime (0 permet de garder la sentinelle fixe)
         {
             chronometer += Time.deltaTime;//update chrono
@@ -107,8 +108,13 @@ public class Sentry : MonoBehaviour
         if(!beat && animationTongue < animationTongueMax)
         {
             Vector3 yVelocity = new Vector3();
-            Vector3 newPosition = new Vector3(tongue.GetPosition(1).x, tongue.GetPosition(1).y + 0.5f, 0);
+            Vector3 newPosition = new Vector3(tongue.GetPosition(1).x + (transform.up.x), tongue.GetPosition(1).y + (transform.up.y), 0);
             tongue.SetPosition(1, Vector3.SmoothDamp(tongue.GetPosition(1), newPosition, ref yVelocity, 0.2f));
+            if(target) setObserver(target.position);
+            else
+            {
+                target = null;
+            }
         }
         else if (!beat && animationTongue >= animationTongueMax)
         {
@@ -118,11 +124,12 @@ public class Sentry : MonoBehaviour
             }
             else
             {
+                setObserver(target.position);
                 Vector3 oldPos = tongue.GetPosition(1);
-                Vector3 posTarget = target.position - transform.position;
+                Vector3 posTarget = target.position;
                 Vector3 yVelocity = new Vector3();
                 tongue.SetPosition(1, Vector3.SmoothDamp(oldPos, posTarget, ref yVelocity, 0.05f));
-                if (Vector3.Distance(tongue.GetPosition(1), target.position - transform.position) < 0.1f)
+                if (Vector3.Distance(tongue.GetPosition(1), target.position) < 0.1f)
                 {
                     beat = true;
                     animationTongue = animationTongueMax;
@@ -131,7 +138,7 @@ public class Sentry : MonoBehaviour
         }
         else if(beat){
             GoBackTongue();
-            target.position = tongue.GetPosition(1) + transform.position;
+            target.position = tongue.GetPosition(1);
 
             if(Vector3.Distance(tongue.GetPosition(1), tongue.GetPosition(0)) < 0.1f)
             {
