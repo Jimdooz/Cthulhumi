@@ -8,6 +8,7 @@ public class Follower : MonoBehaviour
 
     public Light2D observerLight;
     public FieldOfView field;
+    public FieldOfView fieldMin;
     private Rigidbody2D followerPhysics;
 
     public Transform basePoint;
@@ -68,7 +69,7 @@ public class Follower : MonoBehaviour
 
     void idleFunction() {
         //If player found --> Found
-        if(field.visibleTargets.Count > 0) {
+        if(field.visibleTargets.Count > 0 || fieldMin.visibleTargets.Count > 0) {
             changeStateToFound();
         }
         if(basePoint) followerPhysics.MovePosition(Vector2.Lerp(transform.position, basePoint.position, Time.deltaTime * speedFollower));
@@ -84,7 +85,7 @@ public class Follower : MonoBehaviour
     }
 
     void foundFunction() {
-        if(field.visibleTargets.Count <= 0) {
+        if(field.visibleTargets.Count <= 0 && fieldMin.visibleTargets.Count <= 0) {
             changeStateToAlert();
         }
 
@@ -94,19 +95,18 @@ public class Follower : MonoBehaviour
         //Go to the target
         if (dash)
         {
-            Debug.Log((target.position - transform.position).normalized);
             followerPhysics.AddForce((target.position - transform.position).normalized * 110);
             dash = false;
         }
         else
         {
-            GetComponent<SpriteRenderer>().flipX = target.position.x < transform.position.x;
+            transform.eulerAngles = new Vector3(0, target.position.x < transform.position.x ? 0 : 180, 0);
             //followerPhysics.MovePosition(Vector2.Lerp(transform.position, target.position, Time.deltaTime * speedFollower));
         }
     }
 
     void alertFunction() {
-        if (field.visibleTargets.Count > 0) {
+        if (field.visibleTargets.Count > 0 || fieldMin.visibleTargets.Count > 0) {
             changeStateToFound();
         }
         timerAlert += Time.deltaTime;
@@ -130,12 +130,25 @@ public class Follower : MonoBehaviour
         observerLight.intensity = 0.3f;
     }
 
-    void changeStateToFound() {
-        currentState = STATE.found;
-        observerLight.color = new Color(1, 0, 0, 0.5f);
-        observerLight.intensity = 1;
-        timerAlert = 0;
-        target = field.visibleTargets[0];
+    void changeStateToFound()
+    {
+        target = null;
+        List<Transform> allTargets = new List<Transform>();
+        allTargets.AddRange(fieldMin.visibleTargets);
+        allTargets.AddRange(field.visibleTargets);
+        for (int i = 0; i < allTargets.Count; i++)
+        {
+            Player player = allTargets[i].gameObject.GetComponent<Player>();
+            Human human = allTargets[i].gameObject.GetComponent<Human>();
+            if ((player && !player.IsDead()) || (human && !human.IsDead())) { target = allTargets[i]; break; }
+        }
+        if (target)
+        {
+            currentState = STATE.found;
+            observerLight.color = new Color(1, 0, 0, 0.5f);
+            observerLight.intensity = 1;
+            timerAlert = 0;
+        }
     }
 
     void changeStateToIdle() {
@@ -145,13 +158,20 @@ public class Follower : MonoBehaviour
         timerAlert = 0;
     }
 
-    void OnCollisionEnter2D(Collision2D col) {
-        if (col.gameObject.layer == LayerMask.GetMask("Player"))
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.layer == LayerMask.NameToLayer("Player") || col.gameObject.layer == LayerMask.NameToLayer("Humans"))
         {
             Player player = col.gameObject.GetComponent<Player>();
             if (player) {
                 player.Die();
             }
+
+            Human human = col.gameObject.GetComponent<Human>();
+            if (human) {
+                human.Die();
+            }
+            changeStateToAlert();
         }
     }
 }
