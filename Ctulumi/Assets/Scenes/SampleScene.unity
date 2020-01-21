@@ -188,13 +188,13 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 0.49936947
-    height: 0.49775788
+    width: 1
+    height: 1
   near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.46875
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -224,3 +224,72 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2224863607828689358
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2224863608363430256, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224863608363430256, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224863608363430256, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224863608363430256, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224863608363430256, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224863608363430256, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224863608363430256, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224863608363430256, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224863608363430256, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224863608363430256, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224863608363430256, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224863608363430259, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+        type: 3}
+      propertyPath: m_Name
+      value: Tantacle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5e195ae78d986b540bf1fb33ea0f0ff4, type: 3}
