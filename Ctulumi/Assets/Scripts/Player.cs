@@ -8,13 +8,16 @@ public class Player : MonoBehaviour
     [Header("Move")]
     public float walkSpeed;
     public float runSpeed;
-    public bool instantStop;
+    public bool instantStop = true;
     public bool airControl;
     public float airControlSpeed;
     [Header("Jump")]
+    public float multiplyVelocityX;
     public float jumpSpeed;
-    public float maxJumpTimer;
-    public float checkGroundSize = 0.2f;
+    public float jumpTimerMax=0.5f;
+    public bool cuttingJumpOnKeyUp;
+    public float cuttingJumpFactor = 0.5f;
+    public Vector2 checkGroundSize;
     public float groundedDelay = 0.1f;
     public Transform groundCheck;
     [Header("Controller settings")]
@@ -27,11 +30,12 @@ public class Player : MonoBehaviour
     bool grounded;
     float groundedTimer;
     //jump
-    bool canJump;
     bool jumping;
-    float jumpTimer;
 
+    //flip
+    bool right = true;
     //move
+    bool run;
     float speed;
     Vector2 velocity;
     #endregion
@@ -45,14 +49,14 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        animator.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
         CheckGrounded();
         Move();
         Jump();
-        groundedTimer += Time.deltaTime;
+        SetAnimator();
     }
 
     void FixedUpdate()
@@ -62,38 +66,53 @@ public class Player : MonoBehaviour
         else
             rb2d.velocity = new Vector2(velocity.x, rb2d.velocity.y);
     }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(groundCheck.position, new Vector3(checkGroundSize.x, checkGroundSize.y, 1));
+    }
     #endregion
+
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && canJump)
+        if (Input.GetButton("Jump") && CanJump())
         {
-            velocity.y = jumpSpeed / 10;
+            velocity.y = jumpSpeed;
             jumping = true;
-        }
-        if (Input.GetButton("Jump") && jumping && jumpTimer < maxJumpTimer)
-        {
-            velocity.y = jumpSpeed / 10;
-            jumpTimer += Time.deltaTime;
         }
         else
         {
+            velocity.y = rb2d.velocity.y;
+        }
+
+        if (Input.GetButtonUp("Jump") && !IsGrounded())
+        {
+            CutJump();
             jumping = false;
+        }
+    }
+    void CutJump()
+    {
+        if (rb2d.velocity.y > 0)
+        {
+            velocity.y = velocity.y * cuttingJumpFactor;
         }
     }
 
     void Move()
     {
+        float vx = Input.GetAxisRaw("Horizontal");
         if (IsGrounded())
         {
             if (Input.GetButton("Run"))
             {
                 speed = runSpeed;
-                animator.SetBool("Run", true);
+                run = true;
             }
             else
             {
                 speed = walkSpeed;
-                animator.SetBool("Run", false);
+                run = false;
             }
         }
         else
@@ -103,29 +122,40 @@ public class Player : MonoBehaviour
             else
                 speed = 0;
         }
-        float vx = Input.GetAxisRaw("Horizontal");
-        if (Mathf.Abs(vx) > axisMargin) //permet de ne pas se déplacer si le joystick est à l'arrêt
+
+        if (Mathf.Abs(vx) > axisMargin && CanMove()) //permet de ne pas se déplacer si le joystick est à l'arrêt
         {
-            velocity.x = vx * walkSpeed / 10;
+            if ((right && vx < 0) || (!right && vx > 0))
+                Flip();
+            velocity.x = vx * speed;
         }
         else
         {
-            if (instantStop)
+            if (instantStop && IsGrounded())
                 velocity.x = 0;
             else
                 velocity.x = rb2d.velocity.x;
         }
-        animator.SetFloat("Moving", Mathf.Abs(rb2d.velocity.x));
+
 
     }
 
     void CheckGrounded()
     {
-        Collider2D c = Physics2D.OverlapBox(groundCheck.position, new Vector2(1, checkGroundSize), 0, LayerMask.GetMask("Wall"));
+        Collider2D c = Physics2D.OverlapBox(groundCheck.position, checkGroundSize, 0, LayerMask.GetMask("Wall"));
         if (c != null)
         {
             OnGrounded();
         }
+        else
+        {
+            OnNotGrounded();
+        }
+    }
+    void OnNotGrounded()
+    {
+        grounded = false;
+        groundedTimer += Time.deltaTime;
     }
     void OnGrounded()
     {
@@ -135,5 +165,29 @@ public class Player : MonoBehaviour
     bool IsGrounded()
     {
         return grounded || groundedTimer < groundedDelay;
+    }
+    bool CanJump()
+    {
+        return IsGrounded() || (cuttingJumpOnKeyUp && groundedTimer < jumpTimerMax);
+    }
+    bool CanMove()
+    {
+        return IsGrounded() || airControl;
+    }
+    void Flip()
+    {
+        Vector3 v = transform.localScale;
+        v.x *= -1;
+        transform.localScale = v;
+        right = !right;
+    }
+
+    void SetAnimator()
+    {
+        animator.SetFloat("VelocityX", Mathf.Abs(rb2d.velocity.x));
+        animator.SetFloat("VelocityY", Mathf.Abs(rb2d.velocity.y));
+        animator.SetBool("Run", run);
+        animator.SetBool("Jumping", jumping);
+        animator.SetBool("Grounded", grounded);
     }
 }
