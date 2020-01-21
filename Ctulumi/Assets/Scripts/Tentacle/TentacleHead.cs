@@ -27,6 +27,7 @@ public class TentacleHead : MonoBehaviour
     }
 
     void FixedUpdate() {
+
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
@@ -39,8 +40,6 @@ public class TentacleHead : MonoBehaviour
         float distanceLastPoint = Vector2.Distance(lastPoint, headPosition);
 
         float isRetracting = Input.GetAxisRaw("Rewind");
-
-        Debug.Log(isRetracting);
 
 
         if (allPoints.Count > 100 || isRetracting > 0) {

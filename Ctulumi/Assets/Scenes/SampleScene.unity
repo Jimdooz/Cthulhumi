@@ -224,6 +224,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &543195325 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2224863608363430259, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2224863607828689358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &543195326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543195325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b1018afc60cbee458f98375a969768d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedTentacle: 2
+  speedRewind: 30
+  HeadTentacle: {fileID: 1428693463}
+  Tentacle: {fileID: 2095692508}
 --- !u!1 &680421149
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +255,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 680421150}
-  m_Layer: 0
+  - component: {fileID: 680421151}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -248,12 +271,44 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680421149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.024573242, y: -0.18614165, z: -7.1271296}
+  m_LocalPosition: {x: -0.73, y: 1.62, z: -7.1271296}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &680421151
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680421149}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!1 &1428693463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2224863606573010969, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2224863607828689358}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1890598921
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,14 +338,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae73937edafa8947a251ae585dcfca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 1.14
-  viewAngle: 157
+  viewRadius: 2.08
+  viewAngle: 88
   targetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   visibleTargets: []
 --- !u!4 &1890598923
 Transform:
@@ -306,6 +361,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!120 &2095692508 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 2224863606963112722, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2224863607828689358}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2224863607828689358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -383,5 +444,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tentacle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2224863608363430257, guid: 5e195ae78d986b540bf1fb33ea0f0ff4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e195ae78d986b540bf1fb33ea0f0ff4, type: 3}
