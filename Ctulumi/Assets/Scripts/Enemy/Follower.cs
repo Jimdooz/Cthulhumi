@@ -71,7 +71,7 @@ public class Follower : MonoBehaviour
         if(field.visibleTargets.Count > 0) {
             changeStateToFound();
         }
-        followerPhysics.MovePosition(Vector2.Lerp(transform.position, basePoint.position, Time.deltaTime * speedFollower));
+        if(basePoint) followerPhysics.MovePosition(Vector2.Lerp(transform.position, basePoint.position, Time.deltaTime * speedFollower));
 
 
         timerChangeObserve += Time.deltaTime;
@@ -143,5 +143,15 @@ public class Follower : MonoBehaviour
         observerLight.color = new Color(1, 1, 1, 0.5f);
         observerLight.intensity = 0.2f ;
         timerAlert = 0;
+    }
+
+    void OnCollisionEnter2D(Collision2D col) {
+        if (col.gameObject.layer == LayerMask.GetMask("Player"))
+        {
+            Player player = col.gameObject.GetComponent<Player>();
+            if (player) {
+                player.Die();
+            }
+        }
     }
 }
