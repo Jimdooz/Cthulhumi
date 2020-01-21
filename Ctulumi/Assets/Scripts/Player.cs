@@ -22,10 +22,14 @@ public class Player : MonoBehaviour
     public Transform groundCheckTransform;
 
     [Header("WallJump")]
-    public Transform hitWallTransform;
-    public float hitWallDelay = 0.1f;
-    public Vector2 hitWallSize;
+    public float hitWallDelay = 0.1f;   
     public float wallJumpSpeed = 20;
+    public float wallJumpTimerMax = 0.3f;
+    public Transform hitWallTransform;
+    public Vector2 hitWallSize;
+    public bool wallJumpFromBehind = false;
+    public Transform hitWallTransformBehind;
+    public Vector2 hitWallSizeBehind;
     [Header("Gravity")]
     public float gravity = 8;
     public float jumpGravity = 3;
@@ -51,7 +55,9 @@ public class Player : MonoBehaviour
     float preJumpTimer;
     //wall jump
     float hitWallTimer;
-    Vector3 wallPos;
+    float wallJumpDir;
+    bool wallJumping;
+    float wallJumpTimer;
 
     //life
     bool dead = false;
@@ -82,10 +88,6 @@ public class Player : MonoBehaviour
         Move();
         Jump();
         SetAnimator();
-    }
-
-    void FixedUpdate()
-    {
         rb2d.velocity = velocity;
     }
 
@@ -93,7 +95,9 @@ public class Player : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawCube(groundCheckTransform.position, new Vector3(checkGroundSize.x, checkGroundSize.y, 1));
+        Gizmos.color = Color.blue;
         Gizmos.DrawCube(hitWallTransform.position, new Vector3(hitWallSize.x, hitWallSize.y, 1));
+        Gizmos.DrawCube(hitWallTransformBehind.position, new Vector3(hitWallSizeBehind.x, hitWallSizeBehind.y, 1));
     }
     #endregion
 
@@ -110,8 +114,8 @@ public class Player : MonoBehaviour
     {
         return dead;
     }
-    #endregion   
-       
+    #endregion
+
     #region Jump
     void SetJumpInput()
     {
@@ -134,7 +138,10 @@ public class Player : MonoBehaviour
             rb2d.gravityScale = jumpGravity;
             if (!IsGrounded() && IsHittingWall())
             {
-                velocity.x = wallJumpSpeed * -Mathf.Sign(wallPos.x);
+                velocity.x = wallJumpSpeed * wallJumpDir;
+                Debug.Log(wallJumpDir);
+                wallJumpTimer = 0;
+                wallJumping = true;
             }
         }
 
@@ -143,6 +150,15 @@ public class Player : MonoBehaviour
             if (Input.GetButtonUp("Jump") && cuttingJumpOnKeyUp)
                 CutJump();
             rb2d.gravityScale = gravity;
+        }
+        if (wallJumping && wallJumpTimer > wallJumpTimerMax)
+        {
+            wallJumping = false;
+            wallJumpTimer = 0;
+        }
+        else if(wallJumping)
+        {
+            wallJumpTimer += Time.deltaTime;
         }
     }
     void CutJump()
@@ -199,9 +215,12 @@ public class Player : MonoBehaviour
         {
             if ((right && vx < 0) || (!right && vx > 0))
                 Flip();
-            if (IsGrounded()) 
+            if (IsGrounded())
+            {
+                Debug.Log("1");
                 velocity.x = vx * speed;
-            else if (airControl)
+            }
+            else if (airControl && !wallJumping)
             {
                 float x = vx * speed;
                 float rx = rb2d.velocity.x;
@@ -219,8 +238,6 @@ public class Player : MonoBehaviour
             else
                 velocity.x = rb2d.velocity.x;
         }
-
-
     }
     void ResetVelocity()
     {
@@ -233,20 +250,35 @@ public class Player : MonoBehaviour
     void CheckHitWall()
     {
         Collider2D c = Physics2D.OverlapBox(hitWallTransform.position, hitWallSize, 0, LayerMask.GetMask("Wall"));
-        if (c != null)
+        Collider2D b = Physics2D.OverlapBox(hitWallTransformBehind.position, hitWallSizeBehind, 0, LayerMask.GetMask("Wall"));
+        if (c != null || (wallJumpFromBehind && b!=null))
         {
-            OnHitWall(c);
+            bool behind= c== null;
+            OnHitWall(behind);
         }
         else
         {
             OnNoHitWall();
         }
     }
-    void OnHitWall(Collider2D c)
+    void OnHitWall(bool behind)
     {
         hitWall = true;
         hitWallTimer = 0;
-        wallPos = c.transform.position;
+        if (behind)
+        {
+            if (right)
+                wallJumpDir = 1;
+            else
+                wallJumpDir = -1;
+        }
+        else
+        {
+            if (right)
+                wallJumpDir = -1;
+            else
+                wallJumpDir = 1;
+        }
     }
     void OnNoHitWall()
     {
@@ -255,7 +287,7 @@ public class Player : MonoBehaviour
     }
     bool IsHittingWall()
     {
-        return hitWall || hitWallTimer<hitWallDelay;
+        return hitWall || hitWallTimer < hitWallDelay;
     }
     #endregion
 
@@ -263,10 +295,8 @@ public class Player : MonoBehaviour
     void CheckGrounded()
     {
         Collider2D c = Physics2D.OverlapBox(groundCheckTransform.position, checkGroundSize, 0, LayerMask.GetMask("Wall"));
-
         if (c != null)
         {
-            Debug.Log("grounded");
             OnGrounded();
         }
         else

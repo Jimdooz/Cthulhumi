@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &943099882172781755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8419600806824902607}
+  m_Layer: 8
+  m_Name: HitWallBehind
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8419600806824902607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943099882172781755}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.52, y: -0.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5622371710459515282}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3790001914129034639
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3790001914129034639}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.67, z: 0}
+  m_LocalPosition: {x: -0.07, y: -1.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5622371710459515282}
@@ -54,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4208299069277236905}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: -0.4, z: 0}
+  m_LocalPosition: {x: 0.52, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5622371710459515282}
@@ -94,6 +124,7 @@ Transform:
   m_Children:
   - {fileID: 3867765539788212775}
   - {fileID: 1817804459945529834}
+  - {fileID: 8419600806824902607}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -183,18 +214,22 @@ MonoBehaviour:
   airControlSpeed: 5
   instantStop: 1
   airControl: 1
-  jumpSpeed: 16
-  jumpTimerMax: 0.2
+  jumpSpeed: 19
+  jumpTimerMax: 0.35
   cuttingJumpOnKeyUp: 1
   cuttingJumpFactor: 0.2
   preJumpDelay: 0.1
-  checkGroundSize: {x: 1.2, y: 0.4}
+  checkGroundSize: {x: 1, y: 0.3}
   groundedDelay: 0.1
   groundCheckTransform: {fileID: 3867765539788212775}
-  hitWallTransform: {fileID: 1817804459945529834}
   hitWallDelay: 0.1
-  hitWallSize: {x: 0.4, y: 2.4}
-  wallJumpSpeed: 15
+  wallJumpSpeed: 10
+  wallJumpTimerMax: 0.2
+  hitWallTransform: {fileID: 1817804459945529834}
+  hitWallSize: {x: 0.4, y: 1.8}
+  wallJumpFromBehind: 1
+  hitWallTransformBehind: {fileID: 8419600806824902607}
+  hitWallSizeBehind: {x: 0.4, y: 1.8}
   gravity: 9
   jumpGravity: 5
   axisMargin: 0.1
@@ -232,6 +267,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.12}
-  m_Size: {x: 0.76, y: 2.92}
+  m_Offset: {x: -0.05115515, y: -0.037260294}
+  m_Size: {x: 1.1557237, y: 3.1383052}
   m_Direction: 0
