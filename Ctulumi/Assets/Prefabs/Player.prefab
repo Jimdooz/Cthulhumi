@@ -149,18 +149,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   runSpeed: 10
+  airControlSpeed: 5
   instantStop: 1
   airControl: 1
   jumpSpeed: 16
   jumpTimerMax: 0.2
   cuttingJumpOnKeyUp: 1
-  cuttingJumpFactor: 0.5
+  cuttingJumpFactor: 0.2
   preJumpDelay: 0.1
   checkGroundSize: {x: 0.6, y: 0.2}
   groundedDelay: 0.1
   groundCheck: {fileID: 3867765539788212775}
-  gravity: 6
-  jumpGravity: 2
+  gravity: 9
+  jumpGravity: 5
   axisMargin: 0.1
 --- !u!50 &3552909374563263078
 Rigidbody2D:
