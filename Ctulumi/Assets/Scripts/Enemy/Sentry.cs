@@ -128,7 +128,7 @@ public class Sentry : MonoBehaviour
                 Vector3 oldPos = tongue.GetPosition(1);
                 Vector3 posTarget = target.position;
                 Vector3 yVelocity = new Vector3();
-                tongue.SetPosition(1, Vector3.SmoothDamp(oldPos, posTarget, ref yVelocity, 0.05f));
+                tongue.SetPosition(1, Vector3.SmoothDamp(oldPos, posTarget, ref yVelocity, 0.01f));
                 if (Vector3.Distance(tongue.GetPosition(1), target.position) < 0.1f)
                 {
                     beat = true;
