@@ -35,6 +35,13 @@ public class Player : MonoBehaviour
     public float jumpGravity = 3;
     [Header("Controller settings")]
     public float axisMargin; // marge de detection du controller
+
+    [Header("Accessories")]
+    GameObject Candy;
+    GameObject Cosmetic;
+    GameObject Flower;
+    GameObject Hat;
+    GameObject Node;
     #endregion
 
     #region Private vars
@@ -54,6 +61,7 @@ public class Player : MonoBehaviour
     bool jumpInput;
     float preJumpTimer;
     //wall jump
+    bool wallJumpInput;
     float hitWallTimer;
     float wallJumpDir;
     bool wallJumping;
@@ -81,10 +89,10 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
-        SetJumpInput();
         ResetVelocity();
         CheckHitWall();
         CheckGrounded();
+        SetJumpInput();
         Move();
         Jump();
         SetAnimator();
@@ -114,6 +122,10 @@ public class Player : MonoBehaviour
     {
         return dead;
     }
+    public void EquipCandy()
+    {
+
+    }
     #endregion
 
     #region Jump
@@ -123,11 +135,20 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jumpInput = true;
+            if (!IsGrounded())
+            {
+                wallJumpInput = true;
+            }
+            else
+            {
+                wallJumpInput = false;
+            }
             preJumpTimer = 0;
         }
         if (preJumpTimer > preJumpDelay)
         {
             jumpInput = false;
+            wallJumpInput = false;
         }
     }
     void Jump()
@@ -136,7 +157,7 @@ public class Player : MonoBehaviour
         {
             velocity.y = jumpSpeed;
             rb2d.gravityScale = jumpGravity;
-            if (!IsGrounded() && IsHittingWall())
+            if (!IsGrounded() && IsHittingWall() && wallJumpInput)
             {
                 velocity.x = wallJumpSpeed * wallJumpDir;
                 Debug.Log(wallJumpDir);
