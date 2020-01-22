@@ -58,7 +58,7 @@ public class TentacleHead : MonoBehaviour
 
     void FixedUpdate() {
 
-        if (allPoints.Count > 2) Begin = true;
+        if (allPoints.Count > 3) Begin = true;
 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
