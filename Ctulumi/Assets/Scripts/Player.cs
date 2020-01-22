@@ -42,6 +42,9 @@ public class Player : MonoBehaviour
     public GameObject Flower;
     public GameObject Hat;
     public GameObject Node;
+
+    [Header("Grappling")]
+    public GrapplingView grapplingView;
     #endregion
 
     #region Private vars

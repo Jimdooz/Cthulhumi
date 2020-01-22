@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrappinView : MonoBehaviour
+public class GrapplingView : MonoBehaviour
 {
 
     public float maxDistance = 21f;
