@@ -25,7 +25,6 @@ public class Item : MonoBehaviour
                 System.Type thisType = player.GetType();
                 System.Reflection.MethodInfo theMethod = thisType.GetMethod(methodCall);
                 theMethod.Invoke((object)player, null);
-                Debug.Log(theMethod);
                 Destroy(this.gameObject);
             }
         }
