@@ -8,7 +8,6 @@ public class Reloader : MonoBehaviour
 
     public Player player;
     public float minBase;
-    bool reloading = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,24 +29,10 @@ public class Reloader : MonoBehaviour
         {
             reloadScene();
         }
-        if (!reloading && player!=null && player.IsDead())
-        {
-            reloading = true;
-            Reload(3);
-        }
     }
 
     void reloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-    public void Reload(float t)
-    {
-        StartCoroutine("ReloadCoroutine",t);
-    }
-    IEnumerator ReloadCoroutine(float t)
-    {
-        yield return new WaitForSeconds(t);
-        reloadScene();
     }
 }

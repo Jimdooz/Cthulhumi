@@ -152,7 +152,7 @@ public class Player : MonoBehaviour
                 part.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-30.0f, 30.0f), Random.Range(-30.0f, 30.0f)), ForceMode2D.Impulse);
             }
             Destroy(smokePuff, totalDuration);
-            gameObject.SetActive(false);
+            Destroy(this.gameObject);
         }
     }
     public void Stun(float timeStunned)
