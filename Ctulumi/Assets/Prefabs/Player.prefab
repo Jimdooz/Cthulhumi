@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 3899384492970208446}
   - component: {fileID: 2144402542503245917}
   m_Layer: 8
-  m_Name: Candy
+  m_Name: CandyWalk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
