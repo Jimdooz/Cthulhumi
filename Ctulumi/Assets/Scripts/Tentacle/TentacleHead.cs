@@ -32,15 +32,7 @@ public class TentacleHead : MonoBehaviour
     void Update() {
         if(grabTentacle.grab && Input.GetAxisRaw("Jump") > 0)
         {
-            Rigidbody2D rigid2D = grabTentacle.grab.GetComponent<Rigidbody2D>();
-            if (rigid2D)
-            {
-                rigid2D.velocity = (new Vector2(HeadTentacle.transform.position.x, HeadTentacle.transform.position.y) - new Vector2(grabTentacle.grab.transform.position.x, grabTentacle.grab.transform.position.y)) * Time.deltaTime * 500f ;
-            }
-            else
-            {
-                grabTentacle.grab.transform.position = HeadTentacle.transform.position;
-            }
+            grabTentacle.grab.transform.position = HeadTentacle.transform.position;
         }
         if(grabTentacle.activable && Input.GetAxisRaw("Jump") > 0 && resetActive)
         {

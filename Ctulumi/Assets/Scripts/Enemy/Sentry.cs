@@ -144,7 +144,10 @@ public class Sentry : MonoBehaviour
                 animator.SetBool("eat", false);
                 Player player = target.gameObject.GetComponent<Player>();
                 Human human = target.gameObject.GetComponent<Human>();
-                if (player) player.Die();
+                if (player) {
+                    GetComponent<AudioSource>().Play();
+                    player.Die();
+                }
                 else if (human) human.Die();
                 target = null;
             }
@@ -161,7 +164,7 @@ public class Sentry : MonoBehaviour
                 {
                     Player player = field.visibleTargets[i].gameObject.GetComponent<Player>();
                     Human human = field.visibleTargets[i].gameObject.GetComponent<Human>();
-                    if ((player && !player.IsDead()) || (human && !human.IsDead())) { target = field.visibleTargets[i]; break; }
+                    if ((player && !player.IsDead()) || (human && !human.IsDead())) {target = field.visibleTargets[i]; break; }
                 }
             }
         }

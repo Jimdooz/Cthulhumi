@@ -9,7 +9,7 @@ public class Button : Activable
     public override void activate()
     {
         on = !on;
-        Debug.Log(on);
+        GetComponent<Animator>().SetBool("on", on);
     }
 
     public override bool IsActive()
