@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -50,6 +52,10 @@ public class Player : MonoBehaviour
     [Header("Tentacle")]
     public GameObject tentacleHeadPrefab;
     public Transform tentacleSpawnPoint;
+
+    [Header("Effects")]
+    public GameObject bloodEffect;
+    public List<GameObject> deadBody = new List<GameObject>();
     #endregion
 
     #region Private vars
@@ -130,7 +136,22 @@ public class Player : MonoBehaviour
     #region Player API
     public void Die()
     {
-        dead = true;
+        if (!dead)
+        {
+            dead = true;
+
+            GameObject smokePuff = Instantiate(bloodEffect, transform.position, transform.rotation) as GameObject;
+            ParticleSystem parts = smokePuff.GetComponent<ParticleSystem>();
+            float totalDuration = parts.main.duration + parts.main.startLifetime.constantMax;
+            for (int i = 0; i < deadBody.Count; i++)
+            {
+                GameObject part = Instantiate(deadBody[i], transform.position, transform.rotation) as GameObject;
+                Destroy(part, Random.Range(0.5f, 8f));
+                part.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-30.0f, 30.0f), Random.Range(-30.0f, 30.0f)), ForceMode2D.Impulse);
+            }
+            Destroy(smokePuff, totalDuration);
+            Destroy(this.gameObject);
+        }
     }
     public void Stun(float timeStunned)
     {
