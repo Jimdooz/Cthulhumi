@@ -11,6 +11,8 @@ public class Human : MonoBehaviour
     private Rigidbody2D humanPhysics;
     private Animator animator;
 
+    public List<GameObject> deadBody = new List<GameObject>();
+
     public PlsCheck plsCheck;
 
     private bool dead = false;
@@ -88,6 +90,12 @@ public class Human : MonoBehaviour
             GameObject smokePuff = Instantiate(bloodEffect, transform.position, transform.rotation) as GameObject;
             ParticleSystem parts = smokePuff.GetComponent<ParticleSystem>();
             float totalDuration = parts.main.duration + parts.main.startLifetime.constantMax;
+            for(int i = 0; i < deadBody.Count; i++)
+            {
+                GameObject part = Instantiate(deadBody[i], transform.position, transform.rotation) as GameObject;
+                Destroy(part, Random.Range(0.5f, 8f));
+                part.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-30.0f, 30.0f), Random.Range(-30.0f, 30.0f)), ForceMode2D.Impulse);
+            }
             Destroy(smokePuff, totalDuration);
             Destroy(this.gameObject);
         }

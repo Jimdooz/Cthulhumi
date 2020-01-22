@@ -94,7 +94,7 @@ public class Follower : MonoBehaviour
         }
 
         //Look at 2D
-        setObserver(target.position);
+        if(target) setObserver(target.position);
 
         //Go to the target
         if (dash)

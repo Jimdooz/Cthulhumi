@@ -33,7 +33,6 @@ public class Sentry : MonoBehaviour
 
     void setObserver(Vector3 targetPosition)
     {
-        Debug.Log(targetPosition);
         Vector3 upTransform = observerLight.gameObject.transform.up;
         Vector3 upTarget = targetPosition - observerLight.gameObject.transform.position;
         Vector3 yVelocity = new Vector3();
@@ -108,7 +107,7 @@ public class Sentry : MonoBehaviour
         if(!beat && animationTongue < animationTongueMax)
         {
             Vector3 yVelocity = new Vector3();
-            Vector3 newPosition = new Vector3(tongue.GetPosition(1).x + (transform.up.x), tongue.GetPosition(1).y + (transform.up.y), 0);
+            Vector3 newPosition = new Vector3(tongue.GetPosition(1).x + (transform.up.x * 0.1f), tongue.GetPosition(1).y + (transform.up.y * 0.1f), 0);
             tongue.SetPosition(1, Vector3.SmoothDamp(tongue.GetPosition(1), newPosition, ref yVelocity, 0.1f));
             if(target) setObserver(target.position);
             else
