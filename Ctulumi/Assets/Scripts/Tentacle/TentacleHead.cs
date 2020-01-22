@@ -19,6 +19,8 @@ public class TentacleHead : MonoBehaviour
 
     bool resetActive = true;
 
+    bool Begin = false;
+
     void Start() {
         HeadPhysics = HeadTentacle.GetComponent<Rigidbody2D>();
         Tentacle.positionCount = 2;
@@ -56,6 +58,8 @@ public class TentacleHead : MonoBehaviour
 
     void FixedUpdate() {
 
+        if (allPoints.Count > 2) Begin = true;
+
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
@@ -90,6 +94,16 @@ public class TentacleHead : MonoBehaviour
     Vector2 getPosition2D()
     {
         return new Vector2(transform.position.x, transform.position.y);
+    }
+
+    public bool Retracted()
+    {
+        if(allPoints.Count <= 2 && Begin)
+        {
+            Begin = false;
+            return true;
+        }
+        return false;
     }
 
 
