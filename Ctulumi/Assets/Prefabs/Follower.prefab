@@ -174,7 +174,7 @@ MonoBehaviour:
   field: {fileID: 312360124990529251}
   fieldMin: {fileID: 315000637}
   basePoint: {fileID: 0}
-  speedFollower: 0.2
+  speedFollower: 0.4
   viewRadius: 20
   viewAngle: 50
   maxTimeAlert: 10
