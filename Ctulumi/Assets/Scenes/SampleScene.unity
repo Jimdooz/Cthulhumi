@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &361553856
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -244,6 +244,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Human
+      objectReference: {fileID: 0}
+    - target: {fileID: 8382123375713869259, guid: cbf549f57c73aac42bf913eab68cfd98,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8382123375713869269, guid: cbf549f57c73aac42bf913eab68cfd98,
         type: 3}
@@ -494,7 +499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &878057895
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -613,7 +618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1737094359
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -720,7 +725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1815701673
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -825,7 +830,7 @@ PrefabInstance:
     - target: {fileID: 5622371710459515277, guid: 050f6029b56d29645aa7ac8cb295b759,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5622371710459515282, guid: 050f6029b56d29645aa7ac8cb295b759,
         type: 3}
@@ -899,7 +904,7 @@ PrefabInstance:
     - target: {fileID: 1347542634639220304, guid: 612aa6d2f22e5dc459bd5f360ee12c05,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1347542634639220307, guid: 612aa6d2f22e5dc459bd5f360ee12c05,
         type: 3}
@@ -1030,6 +1035,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tentacle
       objectReference: {fileID: 0}
+    - target: {fileID: 2224863608363430259, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e195ae78d986b540bf1fb33ea0f0ff4, type: 3}
 --- !u!1001 &4841501011180586372
@@ -1102,7 +1112,7 @@ PrefabInstance:
     - target: {fileID: 4841501011704030971, guid: 3b596229a5065c44c8ac7028df3ba587,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b596229a5065c44c8ac7028df3ba587, type: 3}
@@ -1252,6 +1262,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HumanGirl
       objectReference: {fileID: 0}
+    - target: {fileID: 1124613641572473172, guid: d7fa9e809ec062a4890ca15a024e2ae8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7fa9e809ec062a4890ca15a024e2ae8, type: 3}
 --- !u!1001 &7124064847852556195
@@ -1269,7 +1284,7 @@ PrefabInstance:
     - target: {fileID: 7124064846968012496, guid: 8d7737d65c0f79f429ef1db91faa93cc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7124064846968012501, guid: 8d7737d65c0f79f429ef1db91faa93cc,
         type: 3}
