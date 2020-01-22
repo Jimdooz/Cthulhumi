@@ -11,4 +11,9 @@ public class Button : Activable
         on = !on;
         Debug.Log(on);
     }
+
+    public override bool IsActive()
+    {
+        return on;
+    }
 }
