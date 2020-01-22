@@ -331,8 +331,8 @@ public class Player : MonoBehaviour
 
     void SetAnimator()
     {
-        animator.SetFloat("VelocityX", Mathf.Abs(rb2d.velocity.x));
-        animator.SetFloat("VelocityY", Mathf.Abs(rb2d.velocity.y));
+        animator.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x));
+        animator.SetFloat("VelocityY", rb2d.velocity.y);
         animator.SetBool("Run", run);
         animator.SetBool("Grounded", IsGrounded());
     }
