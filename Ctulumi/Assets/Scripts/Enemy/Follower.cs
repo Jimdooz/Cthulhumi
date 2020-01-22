@@ -136,6 +136,8 @@ public class Follower : MonoBehaviour
 
     void changeStateToFound()
     {
+        AudioSource audio = GetComponent<AudioSource>();
+        if (!audio.isPlaying) audio.Play();
         target = null;
         List<Transform> allTargets = new List<Transform>();
         allTargets.AddRange(fieldMin.visibleTargets);
