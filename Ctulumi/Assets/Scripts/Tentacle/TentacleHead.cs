@@ -20,7 +20,7 @@ public class TentacleHead : MonoBehaviour
     bool resetActive = true;
 
     bool Begin = false;
-
+    bool rewinded = false;
     void Start() {
         HeadPhysics = HeadTentacle.GetComponent<Rigidbody2D>();
         Tentacle.positionCount = 2;
@@ -57,9 +57,7 @@ public class TentacleHead : MonoBehaviour
     }
 
     void FixedUpdate() {
-
-        if (allPoints.Count > 2) Begin = true;
-
+        if (allPoints.Count > 3) Begin = true;
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
@@ -72,7 +70,10 @@ public class TentacleHead : MonoBehaviour
         float distanceLastPoint = Vector2.Distance(lastPoint, headPosition);
 
         float isRetracting = Input.GetAxisRaw("Rewind");
-
+        if (Begin && isRetracting > 0.001f)
+        {
+            rewinded = true;
+        }
 
         if (allPoints.Count > 100 || isRetracting > 0) {
             HeadPhysics.MovePosition(Vector2.Lerp(headPosition + getPosition2D(), lastPoint + getPosition2D(), Time.deltaTime * (isRetracting > 0 ? isRetracting * speedRewind : 1f)));
@@ -98,7 +99,7 @@ public class TentacleHead : MonoBehaviour
 
     public bool Retracted()
     {
-        if(allPoints.Count <= 2 && Begin)
+        if(allPoints.Count <= 2 && Begin && rewinded)
         {
             Begin = false;
             return true;
