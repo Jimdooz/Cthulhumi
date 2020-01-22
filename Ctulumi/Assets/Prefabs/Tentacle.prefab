@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2224863606573010966}
   - component: {fileID: 2224863606573010964}
   - component: {fileID: 2224863606573010967}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HeadTentacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,8 @@ GameObject:
   - component: {fileID: 2224863608328768552}
   - component: {fileID: 2224863608328768551}
   - component: {fileID: 2224863608328768550}
-  - component: {fileID: 2224863608328768553}
+  - component: {fileID: 695926229}
+  - component: {fileID: 695926228}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -284,19 +285,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &2224863608328768553
-SphereCollider:
+--- !u!58 &695926229
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2224863608328768555}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.17
+--- !u!114 &695926228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2224863608328768555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0957b1dc5a458d43b2d605f709015b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grab: {fileID: 0}
+  activable: {fileID: 0}
 --- !u!1 &2224863608363430259
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2224863608363430256
 Transform:
   m_ObjectHideFlags: 0
@@ -346,3 +364,4 @@ MonoBehaviour:
   speedRewind: 30
   HeadTentacle: {fileID: 2224863606573010969}
   Tentacle: {fileID: 2224863606963112722}
+  grabTentacle: {fileID: 695926228}
