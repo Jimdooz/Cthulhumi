@@ -447,7 +447,7 @@ MonoBehaviour:
   cuttingJumpFactor: 0.2
   preJumpDelay: 0.2
   checkGroundSize: {x: 1, y: 0.3}
-  groundedDelay: 0.1
+  groundedDelay: 0.2
   groundCheckTransform: {fileID: 3867765539788212775}
   hitWallDelay: 0.2
   wallJumpSpeed: 10
@@ -470,6 +470,15 @@ MonoBehaviour:
   tentacleHeadPrefab: {fileID: 2224863608363430259, guid: 5e195ae78d986b540bf1fb33ea0f0ff4,
     type: 3}
   tentacleSpawnPoint: {fileID: 21913838381628843}
+  bloodEffect: {fileID: 8199571803975148800, guid: cf551c63d0f23ee4195d27fbbbcf51ba,
+    type: 3}
+  deadBody:
+  - {fileID: 8375229176618658877, guid: 4bad1f251e11adb4a9e58686b2b89ce1, type: 3}
+  - {fileID: 2468623500798795676, guid: 28932304bbb57a84fbb74012fd89072c, type: 3}
+  - {fileID: 1130302413590111333, guid: 363029fc37e67fb4e92c616c2d66dace, type: 3}
+  - {fileID: 8486873873638224539, guid: ff3628f67474a2d419b862e40a97168b, type: 3}
+  - {fileID: 7371530546379279781, guid: b7c116f407318c84a92ccadd08caa688, type: 3}
+  - {fileID: 7976003402850496889, guid: bca4659d0922b4f41aa8506911890e5a, type: 3}
 --- !u!50 &3552909374563263078
 Rigidbody2D:
   serializedVersion: 4
