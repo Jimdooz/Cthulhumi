@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
     #region Inspector vars
+    public string LevelToLoad;
     [Header("Move")]
     public float walkSpeed;
     public float runSpeed;
@@ -87,7 +89,7 @@ public class Player : MonoBehaviour
     float timeStunned = 0;
     bool tentacleMode = false;
     TentacleHead tentacleHead;
-
+    int itemCount = 0;
     #endregion
 
     #region Components
@@ -150,7 +152,7 @@ public class Player : MonoBehaviour
                 part.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-30.0f, 30.0f), Random.Range(-30.0f, 30.0f)), ForceMode2D.Impulse);
             }
             Destroy(smokePuff, totalDuration);
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
     public void Stun(float timeStunned)
@@ -169,22 +171,51 @@ public class Player : MonoBehaviour
     public void EquipCandy()
     {
         Candy.SetActive(true);
+        itemCount += 1;
+        if (itemCount>=5)
+        {
+            OnFullItem();
+        }
     }
     public void EquipCosmetic()
     {
         Cosmetic.SetActive(true);
+        itemCount += 1;
+        if (itemCount >= 5)
+        {
+            OnFullItem();
+        }
     }
     public void EquipFlower()
     {
         Flower.SetActive(true);
+        itemCount += 1;
+        if (itemCount >= 5)
+        {
+            OnFullItem();
+        }
     }
     public void EquipHat()
     {
         Hat.SetActive(true);
+        itemCount += 1;
+        if (itemCount >= 5)
+        {
+            OnFullItem();
+        }
     }
     public void EquipNode()
     {
         Node.SetActive(true);
+        itemCount += 1;
+        if (itemCount >= 5)
+        {
+            OnFullItem();
+        }
+    }
+    public void OnFullItem()
+    {
+        SceneManager.LoadScene(LevelToLoad);
     }
     #endregion
 
