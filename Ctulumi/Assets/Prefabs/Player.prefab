@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 3899384492970208446}
   - component: {fileID: 2144402542503245917}
   m_Layer: 8
-  m_Name: CandyWalk
+  m_Name: Candy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -321,7 +321,6 @@ Transform:
   - {fileID: 1817804459945529834}
   - {fileID: 8419600806824902607}
   - {fileID: 829493927238945373}
-  - {fileID: 7139210071921610355}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -435,7 +434,6 @@ MonoBehaviour:
   Flower: {fileID: 7923169163789212497}
   Hat: {fileID: 318746720667321195}
   Node: {fileID: 7678403124864766835}
-  grapplingView: {fileID: 7139210071921610354}
 --- !u!50 &3552909374563263078
 Rigidbody2D:
   serializedVersion: 4
@@ -713,90 +711,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &2672816005696110482
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 5622371710459515282}
-    m_Modifications:
-    - target: {fileID: 5045208346797928929, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -14.79
-      objectReference: {fileID: 0}
-    - target: {fileID: 5045208346797928929, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 5045208346797928929, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -18.737385
-      objectReference: {fileID: 0}
-    - target: {fileID: 5045208346797928929, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5045208346797928929, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5045208346797928929, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5045208346797928929, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5045208346797928929, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5045208346797928929, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5045208346797928929, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5045208346797928929, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5045208346797928931, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-        type: 3}
-      propertyPath: m_Name
-      value: GrappinView
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1ce2e763059b0654e8a4f037ecd0f716, type: 3}
---- !u!4 &7139210071921610355 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5045208346797928929, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-    type: 3}
-  m_PrefabInstance: {fileID: 2672816005696110482}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7139210071921610354 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5045208346797928928, guid: 1ce2e763059b0654e8a4f037ecd0f716,
-    type: 3}
-  m_PrefabInstance: {fileID: 2672816005696110482}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca2298033013bb54a926b293cce15fcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
