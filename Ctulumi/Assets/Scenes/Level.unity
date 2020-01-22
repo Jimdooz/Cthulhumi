@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -15055,6 +15055,8 @@ GameObject:
   - component: {fileID: 431823210}
   - component: {fileID: 431823212}
   - component: {fileID: 431823211}
+  - component: {fileID: 431823214}
+  - component: {fileID: 431823213}
   m_Layer: 0
   m_Name: Killblocks
   m_TagString: Untagged
@@ -15839,6 +15841,34 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &431823213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431823209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82bba4aea2de5874f97a48ae8d24aea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!19719996 &431823214
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431823209}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1001 &496536190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16190,6 +16220,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3355688802968530225, guid: 050f6029b56d29645aa7ac8cb295b759,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 502582957088118383, guid: 050f6029b56d29645aa7ac8cb295b759,
         type: 3}
       propertyPath: preJumpDelay
@@ -16199,6 +16234,11 @@ PrefabInstance:
         type: 3}
       propertyPath: groundedDelay
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 502582957088118383, guid: 050f6029b56d29645aa7ac8cb295b759,
+        type: 3}
+      propertyPath: wallJumpFromBehind
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5622371710459515277, guid: 050f6029b56d29645aa7ac8cb295b759,
         type: 3}
