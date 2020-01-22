@@ -445,9 +445,9 @@ MonoBehaviour:
   jumpTimerMax: 0.35
   cuttingJumpOnKeyUp: 1
   cuttingJumpFactor: 0.2
-  preJumpDelay: 0.2
+  preJumpDelay: 0.3
   checkGroundSize: {x: 1, y: 0.3}
-  groundedDelay: 0.2
+  groundedDelay: 0.3
   groundCheckTransform: {fileID: 3867765539788212775}
   hitWallDelay: 0.2
   wallJumpSpeed: 10
