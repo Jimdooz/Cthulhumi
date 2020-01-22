@@ -4,5 +4,6 @@ using UnityEngine;
 
 public abstract class Activable : MonoBehaviour
 {
+    public abstract bool IsActive();
     public abstract void activate();
 }

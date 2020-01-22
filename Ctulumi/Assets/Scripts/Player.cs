@@ -37,11 +37,14 @@ public class Player : MonoBehaviour
     public float axisMargin; // marge de detection du controller
 
     [Header("Accessories")]
-    GameObject Candy;
-    GameObject Cosmetic;
-    GameObject Flower;
-    GameObject Hat;
-    GameObject Node;
+    public GameObject Candy;
+    public GameObject Cosmetic;
+    public GameObject Flower;
+    public GameObject Hat;
+    public GameObject Node;
+
+    [Header("Grappling")]
+    public GrapplingView grapplingView;
     #endregion
 
     #region Private vars
@@ -69,6 +72,8 @@ public class Player : MonoBehaviour
 
     //life
     bool dead = false;
+    bool stunned = false;
+    float timeStunned = 0;
     #endregion
 
     #region Components
@@ -89,6 +94,7 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
+        CheckStunTimer();
         ResetVelocity();
         CheckHitWall();
         CheckGrounded();
@@ -114,17 +120,56 @@ public class Player : MonoBehaviour
     {
         dead = true;
     }
-    public void Stun()
+    public void Stun(float timeStunned)
     {
-
+        stunned = true;
+        this.timeStunned = Mathf.Max(this.timeStunned,timeStunned);
     }
     public bool IsDead()
     {
         return dead;
     }
+    public bool IsStunned()
+    {
+        return stunned;
+    }
     public void EquipCandy()
     {
+        Candy.SetActive(true);
+    }
+    public void EquipCosmetic()
+    {
+        Cosmetic.SetActive(true);
+    }
+    public void EquipFlower()
+    {
+        Flower.SetActive(true);
+    }
+    public void EquipHat()
+    {
+        Hat.SetActive(true);
+    }
+    public void EquipNode()
+    {
+        Node.SetActive(true);
+    }
+    #endregion
 
+    #region Control
+    void CheckStunTimer()
+    {
+        if (stunned)
+        {
+            if (timeStunned > 0)
+            {
+                timeStunned -= Time.fixedDeltaTime;
+            }
+            else
+            {
+                timeStunned = 0;
+                stunned = false;
+            }
+        }
     }
     #endregion
 
