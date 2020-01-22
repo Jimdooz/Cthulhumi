@@ -118,7 +118,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0b6a1543d207aa64cbfee37c5878220d, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,34 +143,34 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.3
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.9445676
+        time: 0.720621
         value: 1
-        inSlope: 0.20653942
-        outSlope: 0.20653942
+        inSlope: 0.023796745
+        outSlope: 0.023796745
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.2636816
+        outWeight: 0.7301586
       - serializedVersion: 3
         time: 1
-        value: 0.40291426
-        inSlope: -6.20308
-        outSlope: -6.20308
+        value: 0.22815534
+        inSlope: -7.4436827
+        outSlope: -7.4436827
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.014925359
+        inWeight: 0.11904778
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.34015664, g: 0.7924528, b: 0.41982833, a: 1}
+      key0: {r: 0.08627451, g: 0.12156863, b: 0.21176471, a: 1}
       key1: {r: 0.34901962, g: 0.7960785, b: 0.427451, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -178,7 +178,7 @@ LineRenderer:
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
+      ctime0: 41827
       ctime1: 65535
       ctime2: 0
       ctime3: 0
@@ -233,7 +233,7 @@ Transform:
   m_GameObject: {fileID: 2224863608328768555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 1}
   m_Children: []
   m_Father: {fileID: 2224863606573010966}
   m_RootOrder: 0

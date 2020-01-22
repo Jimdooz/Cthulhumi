@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8382123374669563496}
   - component: {fileID: 8382123374669563499}
   - component: {fileID: 8382123374669563498}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: PlsCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewRadius: 8
-  viewAngle: 80
+  viewAngle: 360
   targetMask:
     serializedVersion: 2
     m_Bits: 1280
@@ -242,10 +242,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   field: {fileID: 8382123375606484428}
+  deadBody:
+  - {fileID: 9199070814887551065, guid: 1cd602b7ac53d084babd6f78d1819ef2, type: 3}
+  - {fileID: 4869374027718253652, guid: c2e55e7789fdd4c45a78244588d86b27, type: 3}
+  - {fileID: 3338325511095259674, guid: 22f97f08d2e614a4e811fb25d9248c8e, type: 3}
+  - {fileID: 2075457192364980997, guid: 54285420a5366c94ca80c80cf2ac2b7c, type: 3}
+  - {fileID: 1499893884572680367, guid: 19c526ee69fb1c7438307598f6ddff88, type: 3}
+  - {fileID: 5711839329874296669, guid: 78cc69d30373fab49baaa28d74bd1c73, type: 3}
   plsCheck: {fileID: 8382123374669563498}
   speedHuman: 2
   viewRadius: 5
-  viewAngle: 180
+  viewAngle: 360
+  bloodEffect: {fileID: 8199571803975148800, guid: cf551c63d0f23ee4195d27fbbbcf51ba,
+    type: 3}
 --- !u!50 &8382123375713869270
 Rigidbody2D:
   serializedVersion: 4
