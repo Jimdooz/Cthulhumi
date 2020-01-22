@@ -45,11 +45,6 @@ public class Player : MonoBehaviour
 
     [Header("Grappling")]
     public GrapplingView grapplingView;
-    public float angle;
-
-    [Header("Tentacle")]
-    public GameObject tentacleHeadPrefab;
-    public Transform tentacleSpawnPoint;
     #endregion
 
     #region Private vars
@@ -79,9 +74,6 @@ public class Player : MonoBehaviour
     bool dead = false;
     bool stunned = false;
     float timeStunned = 0;
-    bool tentacleMode = false;
-    TentacleHead tentacleHead;
-
     #endregion
 
     #region Components
@@ -102,17 +94,13 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
-        CheckTentacleMode();
-        if (!tentacleMode)
-        {
-            CheckStunTimer();
-            ResetVelocity();
-            CheckHitWall();
-            CheckGrounded();
-            SetJumpInput();
-            Move();
-            Jump();
-        }
+        CheckStunTimer();
+        ResetVelocity();
+        CheckHitWall();
+        CheckGrounded();
+        SetJumpInput();
+        Move();
+        Jump();
         SetAnimator();
         rb2d.velocity = velocity;
     }
@@ -217,6 +205,7 @@ public class Player : MonoBehaviour
             if (!IsGrounded() && IsHittingWall() && wallJumpInput)
             {
                 velocity.x = wallJumpSpeed * wallJumpDir;
+                Debug.Log(wallJumpDir);
                 wallJumpTimer = 0;
                 wallJumping = true;
             }
@@ -294,6 +283,7 @@ public class Player : MonoBehaviour
                 Flip();
             if (IsGrounded())
             {
+                Debug.Log("1");
                 velocity.x = vx * speed;
             }
             else if (airControl && !wallJumping)
@@ -396,34 +386,6 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    #region Tentacle
-    void CheckTentacleMode()
-    {
-        if (!tentacleMode)
-        {
-            if (grounded && Input.GetButtonDown("EnterTentacleMode"))
-            {
-                tentacleMode = true;
-                SpawnTentacle();
-            }
-        }
-        else {
-            if (tentacleHead!=null && tentacleHead.Retracted())
-            {
-                Debug.Log("Exit tentacle mode");
-                tentacleMode = false;
-                DestroyImmediate(tentacleHead.gameObject);
-                tentacleHead = null;
-            }    
-        }
-    }
-    void SpawnTentacle()
-    {
-        GameObject go = Instantiate<GameObject>(tentacleHeadPrefab,tentacleSpawnPoint.position,Quaternion.identity, transform.parent);
-        tentacleHead = go.GetComponent<TentacleHead>();
-    }
-    #endregion
-
     #region Graphics
     void Flip()
     {
@@ -439,7 +401,6 @@ public class Player : MonoBehaviour
         animator.SetFloat("VelocityY", rb2d.velocity.y);
         animator.SetBool("Run", run);
         animator.SetBool("Grounded", IsGrounded());
-        animator.SetBool("tentacleMode", tentacleMode);
     }
     #endregion
 }
