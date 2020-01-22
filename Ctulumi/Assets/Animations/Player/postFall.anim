@@ -26,6 +26,46 @@ AnimationClip:
     path: 
     classID: 212
     script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 555123332567018446, guid: 99908f2b99f022546bd01b505357d527,
+        type: 3}
+    attribute: m_Sprite
+    path: Accesories/CandyWalk
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 555181402567352813, guid: 9ce5d904e7ba94341b11c8af7d3a27d7,
+        type: 3}
+    attribute: m_Sprite
+    path: Accesories/Cosmetic
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 4208893999610535650, guid: c0b344fc9de8b9e4b9ea46bac1617d81,
+        type: 3}
+    attribute: m_Sprite
+    path: Accesories/Flower
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 3718026838380232944, guid: da78e82ed07ca4f4c862df552eb84a85,
+        type: 3}
+    attribute: m_Sprite
+    path: Accesories/Hat
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 1547790267940108491, guid: ed38e41157100a64ebbf6c5a458af82f,
+        type: 3}
+    attribute: m_Sprite
+    path: Accesories/Node
+    classID: 212
+    script: {fileID: 0}
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
@@ -40,8 +80,48 @@ AnimationClip:
       typeID: 212
       customType: 23
       isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 1561955934
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 3829048281
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 2459496888
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 3852024386
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 316318555
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: -5339795043135625959, guid: 53a46ab5881b7434ea652aa8aa9456e9, type: 3}
+    - {fileID: 555123332567018446, guid: 99908f2b99f022546bd01b505357d527, type: 3}
+    - {fileID: 555181402567352813, guid: 9ce5d904e7ba94341b11c8af7d3a27d7, type: 3}
+    - {fileID: 4208893999610535650, guid: c0b344fc9de8b9e4b9ea46bac1617d81, type: 3}
+    - {fileID: 3718026838380232944, guid: da78e82ed07ca4f4c862df552eb84a85, type: 3}
+    - {fileID: 1547790267940108491, guid: ed38e41157100a64ebbf6c5a458af82f, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

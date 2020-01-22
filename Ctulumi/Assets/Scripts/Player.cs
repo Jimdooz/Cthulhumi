@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
         rb2d.gravityScale = gravity;
         dead = false;
     }
-    void Update()
+    void FixedUpdate()
     {
         SetJumpInput();
         ResetVelocity();
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
     #region Jump
     void SetJumpInput()
     {
-        preJumpTimer += Time.deltaTime;
+        preJumpTimer += Time.fixedDeltaTime;
         if (Input.GetButtonDown("Jump"))
         {
             jumpInput = true;
@@ -158,7 +158,7 @@ public class Player : MonoBehaviour
         }
         else if(wallJumping)
         {
-            wallJumpTimer += Time.deltaTime;
+            wallJumpTimer += Time.fixedDeltaTime;
         }
     }
     void CutJump()
@@ -283,7 +283,7 @@ public class Player : MonoBehaviour
     void OnNoHitWall()
     {
         hitWall = false;
-        hitWallTimer += Time.deltaTime;
+        hitWallTimer += Time.fixedDeltaTime;
     }
     bool IsHittingWall()
     {
@@ -307,7 +307,7 @@ public class Player : MonoBehaviour
     void OnNotGrounded()
     {
         grounded = false;
-        inAirTimer += Time.deltaTime;
+        inAirTimer += Time.fixedDeltaTime;
     }
     void OnGrounded()
     {
