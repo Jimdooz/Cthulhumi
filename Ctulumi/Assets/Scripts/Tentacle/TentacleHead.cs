@@ -13,7 +13,11 @@ public class TentacleHead : MonoBehaviour
     public LineRenderer Tentacle;
     private Rigidbody2D HeadPhysics;
 
+    public GrabTentacle grabTentacle;
+
     private List<Vector2> allPoints = new List<Vector2>();
+
+    bool resetActive = true;
 
     void Start() {
         HeadPhysics = HeadTentacle.GetComponent<Rigidbody2D>();
@@ -24,6 +28,30 @@ public class TentacleHead : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        if(grabTentacle.grab && Input.GetAxisRaw("Jump") > 0)
+        {
+            Rigidbody2D rigid2D = grabTentacle.grab.GetComponent<Rigidbody2D>();
+            if (rigid2D)
+            {
+                rigid2D.velocity = (new Vector2(HeadTentacle.transform.position.x, HeadTentacle.transform.position.y) - new Vector2(grabTentacle.grab.transform.position.x, grabTentacle.grab.transform.position.y)) * Time.deltaTime * 500f ;
+            }
+            else
+            {
+                grabTentacle.grab.transform.position = HeadTentacle.transform.position;
+            }
+        }
+        if(grabTentacle.activable && Input.GetAxisRaw("Jump") > 0 && resetActive)
+        {
+            Activable activeObject = grabTentacle.activable.GetComponent<Activable>();
+            Debug.Log(activeObject);
+            if(activeObject) activeObject.activate();
+            resetActive = false;
+        }
+
+        if(Input.GetAxisRaw("Jump") == 0)
+        {
+            resetActive = true;
+        }
     }
 
     void FixedUpdate() {
