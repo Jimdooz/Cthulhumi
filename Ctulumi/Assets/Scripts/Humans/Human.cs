@@ -38,8 +38,8 @@ public class Human : MonoBehaviour
     {
         if(plsCheck.isTrigger && currentState != STATE.pls)
         {
-            currentState = STATE.pls;
             animator.SetBool("pls", true);
+            currentState = STATE.pls;
         }
     }
 
@@ -60,8 +60,12 @@ public class Human : MonoBehaviour
                 Player player = field.visibleTargets[i].gameObject.GetComponent<Player>();
                 if ((player && !player.IsDead())) { target = field.visibleTargets[0]; break; }
             }
-            currentState = STATE.run;
-            animator.SetBool("Afraid", true);
+            if(currentState != STATE.run)
+            {
+                GetComponent<AudioSource>().Play();
+                currentState = STATE.run;
+                animator.SetBool("Afraid", true);
+            }
         }
     }
 
