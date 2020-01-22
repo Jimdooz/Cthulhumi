@@ -28,11 +28,22 @@ public class Reloader : MonoBehaviour
         if(player.transform.position.y < minBase)
         {
             reloadScene();
+            if(player!=null && player.IsDead())
+            {
+                player = null;
+                StartCoroutine("Reload");
+            }
         }
     }
 
     void reloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(3);
+        reloadScene();
     }
 }
