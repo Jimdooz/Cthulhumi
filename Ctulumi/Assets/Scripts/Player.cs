@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     public Vector2 checkGroundSize;
     public float groundedDelay = 0.1f;
     public Transform groundCheckTransform;
+    public float intensityWallJump = 1.2f;
 
     [Header("WallJump")]
     public float hitWallDelay = 0.1f;   
@@ -72,10 +73,12 @@ public class Player : MonoBehaviour
     bool run;
     float speed;
     Vector2 velocity;
+    Vector2 lastPosition;
 
     //jump;
     bool jumpInput;
     float preJumpTimer;
+    bool resetJump = true;
     //wall jump
     bool wallJumpInput;
     float hitWallTimer;
@@ -123,6 +126,7 @@ public class Player : MonoBehaviour
         }
         SetAnimator();
         rb2d.velocity = velocity;
+        lastPosition = transform.position;
     }
 
     void OnDrawGizmosSelected()
@@ -241,7 +245,7 @@ public class Player : MonoBehaviour
     void SetJumpInput()
     {
         preJumpTimer += Time.fixedDeltaTime;
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButton("Jump"))
         {
             jumpInput = true;
             if (!IsGrounded())
@@ -254,16 +258,22 @@ public class Player : MonoBehaviour
             }
             preJumpTimer = 0;
         }
-        if (preJumpTimer > preJumpDelay)
+        if (preJumpTimer > preJumpDelay && !IsGrounded())
         {
             jumpInput = false;
             wallJumpInput = false;
         }
+        if (!Input.GetButton("Jump"))
+        {
+            resetJump = true;
+            jumpInput = false;
+        }
     }
     void Jump()
     {
-        if (jumpInput && CanJump())
+        if (jumpInput && (IsGrounded() || IsHittingWall()) && resetJump)
         {
+            resetJump = false;
             velocity.y = jumpSpeed;
             rb2d.gravityScale = jumpGravity;
             if (!IsGrounded() && IsHittingWall() && wallJumpInput)
@@ -271,6 +281,7 @@ public class Player : MonoBehaviour
                 velocity.x = wallJumpSpeed * wallJumpDir;
                 wallJumpTimer = 0;
                 wallJumping = true;
+                velocity.y *= intensityWallJump;
             }
         }
 
@@ -340,7 +351,7 @@ public class Player : MonoBehaviour
             speed = airControlSpeed;
         }
 
-        if (Mathf.Abs(vx) > axisMargin && CanMove()) //permet de ne pas se déplacer si le joystick est à l'arrêt
+        if (Mathf.Abs(vx) > axisMargin && CanMove() || wallJumping) //permet de ne pas se déplacer si le joystick est à l'arrêt
         {
             if ((right && vx < 0) || (!right && vx > 0))
                 Flip();
@@ -415,7 +426,7 @@ public class Player : MonoBehaviour
     }
     bool IsHittingWall()
     {
-        return hitWall || hitWallTimer < hitWallDelay;
+        return hitWall;
     }
     #endregion
 
@@ -444,7 +455,7 @@ public class Player : MonoBehaviour
     }
     bool IsGrounded()
     {
-        return grounded || inAirTimer < groundedDelay;
+        return grounded;
     }
     #endregion
 
@@ -487,7 +498,8 @@ public class Player : MonoBehaviour
 
     void SetAnimator()
     {
-        animator.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x));
+        Vector2 velocity = lastPosition - (Vector2)transform.position;
+        animator.SetFloat("Speed", Mathf.Abs(velocity.x));
         animator.SetFloat("VelocityY", rb2d.velocity.y);
         animator.SetBool("Run", run);
         animator.SetBool("Grounded", IsGrounded());
